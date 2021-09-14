@@ -1,0 +1,97 @@
+---
+title: "Laboratorio 2"
+output:
+  html_document:
+    df_print: paged
+---
+
+## R para archivos de Datos
+
+Para limpiar el ambiente de RStudio se usa el comando: rm(list=ls()).
+
+Para limpiar la consola:
+Ctrl+L
+
+## Carga de los datos
+
+1. Para cargar una librería:
+```{r}
+library(readr)
+```
+
+ATENCION: Solo usaremos la librería **readr** para leer los archivos de datos. NO USAR read.csv .
+
+1. Para leer un archivo de datos de extensión .csv
+```{r}
+DF <- read_csv("DatosDiversos.csv")
+```
+Los datos fueron guardados en un **DataFrame** llamado DF.
+
+2. ¿Cuáles son las variables?
+
+```{r}
+names(DF)
+```
+Para cambiar los nombres de las variables se recomienda la función **rename** de la librería **dplyr**. 
+```{r}
+library(dplyr)
+```
+
+No deben haber variables con nombres con tildes o nombres compuestos separados en blancos. 
+```{r}
+DF %>% rename(Periodo = Período, Codigo = Código, Seccion = Sección, Estatura = `Estatura (cm)`, Peso = `Peso (kg)`, Signo = `Signo del zodiaco`, Reaccion = `Tiempo de reacción`, Video = `Juega videojuegos`, Deporte = `Hace deporte`, Color = `Color favorito`, Cazado = `Talla de zapato`, Polo = `Talla de polo`) -> DFN
+```
+
+3. Para ver cuántas filas (número de observaciones) tiene el DataFrame.
+
+```{r}
+nrow(DFN)
+```
+
+3. Para ver cuántas columnas (número de variables) tiene el DataFrame.
+```{r}
+ncol(DFN)
+```
+4. Para acceder a una posición en particular del DataFrame.
+```{r}
+DFN[3,4]
+```
+5. Para acceder a toda una fila del Dataframe. 
+```{r}
+DFN[8,]
+```
+
+## Limpieza de Datos
+
+1. Para que R nos de un resumen del DataFrame usamos **summary**.
+
+```{r}
+summary(DFN)
+```
+2. ¿Qué Cantidad de datos faltantes hay?
+
+```{r}
+sum(is.na(DFN))
+```
+3. Tabla de datos faltantes (NA's) y datos no faltantes.
+```{r}
+table(is.na(DFN))
+```
+Hay 8720 datos faltantes y 1666 datos no faltantes. 
+
+4. ¿Cuántos registros u observaciones completas hay?
+```{r}
+sum(complete.cases(DFN))
+```
+Hay 74 observaciones completas.
+
+5. ¿Cuántas observaciones incompletas hay?
+
+```{r}
+sum(!complete.cases(DFN))
+```
+Hay 503 observaciones incompletas en el Dataframe (esto es, los 8720 NA's están ubicados en 503 observaciones de las 577 observaciones en total que hay).
+
+
+
+
