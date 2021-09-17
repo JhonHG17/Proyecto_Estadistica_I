@@ -2,6 +2,16 @@
 title: "P0 - Informe"
 output: html_notebook
 ---
+## Grupo N°2
+
+### Integrantes:
+
+- Dominguez Aspilcueta, Pedro Francisco **(Líder)**
+- Del Olmo Dulong, Juan Ignacio
+- Chamorro Torres, Jean Pierre
+- Munguia Cruzatt, Mauro Sthepano
+- Ramos Torres, Guido Antonio
+
 
 ## Tema N°1: Torneos de ESports
 
