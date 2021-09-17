@@ -1,0 +1,42 @@
+---
+title: "P0 - Informe"
+output: html_notebook
+---
+
+## Tema N°1: Torneos de ESports
+
+### Relevancia
+
+- ¿Es el estudio de interés para la audiencia?
+
+  Se define a la audiencia como la comunidad peruana organizadora de torneos de ESports. Y se considera de su interés el conocer:
+  - El crecimiento del mercado global de ESports en los últimos 20 años.
+  - La cantidad de ingresos obtenidos en cada torneo.
+  - Un conjunto de datos de los jugadores profesionales de ESports
+  - Un conjunto de datos de los equipos profesionales de ESports
+  - La cantidad de ingresos obtenidos por cada jugador de ESports
+  - La cantidad de ingresos obtenidos por cada equipo de ESports
+  - La cantidad de ingresos generados por cada videojuego en cada torneo.
+
+- ¿Qué información se desea aportar al final del estudio?
+  ´
+
+
+
+
+### Proveniencia y disponibilidad de los datos
+¿Es posible llegar a la información que se propone de manera específica y concreta?
+
+Se ha obtenido tres diferentes conjuntos de bases de datos 
+[Top 100 Highest Overall Esport Team Earnings](https://www.kaggle.com/chanoncharuchinda/top-100-highest-overall-esport-team-earning?select=ESPORT+Team+Dataset)  
+[eSports Earnings](https://www.kaggle.com/jackdaoud/esports-earnings-for-players-teams-by-game?select=country-and-continent-codes-list.csv)  
+[Esports Earnings 1998 - 2021](https://www.kaggle.com/rankirsh/esports-earnings?select=HistoricalEsportData.csv)  
+
+## Tema N°2: NBA Basketball
+
+## Tema N°3: ¿Cómo afecta el consumo de frutos secos en la alimentación de los alumnos de UTEC?
+
+Consumo en cantidades medidas es beneficioso.
+Demostrar que el consumo de frutos secos mejora los hábitos alimenticios de los alumnos.
+Mejora la concentración de los alumnos en sus clases.
+
