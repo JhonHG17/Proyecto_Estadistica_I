@@ -40,15 +40,15 @@ En términos general se busca mostrar:
 Los datos serán recolectado de tres diferentes conjuntos de bases de datos:  
 
 - [Top 100 Highest Overall Esport Team Earnings](https://www.kaggle.com/chanoncharuchinda/top-100-highest-overall-esport-team-earning?select=ESPORT+Team+Dataset)
-  - Obtenida de kaggle.com con licencia CC0.
+  - Obtenida de https://www.kaggle.com con licencia CC0.
   - Data tomada de https://www.esportsearnings.com/teams/highest-overall.
   - Última actualización: 12 de septiembre del 2021.
 - [eSports Earnings](https://www.kaggle.com/jackdaoud/esports-earnings-for-players-teams-by-game?select=country-and-continent-codes-list.csv)
-  - Obtenida de kaggle.com con licencia CC0.
+  - Obtenida de https://www.kaggle.com con licencia CC0.
   - Data tomada de https://www.esportsearnings.com.
   - Última actualización: Enero 2021
 - [Esports Earnings 1998 - 2021](https://www.kaggle.com/rankirsh/esports-earnings?select=HistoricalEsportData.csv)
-  - Obtenida de kaggle.com con licencia CC0.
+  - Obtenida de https://www.kaggle.com con licencia CC0.
   - Data tomada de https://www.esportsearnings.com.
   - Última actualización: 30 de agosto del 2021.
 
@@ -62,6 +62,8 @@ Se analizarán datos como:
 
 
 ## Tema N°2: NBA Basketball
+
+---------------
 
 ### Relevancia
 
@@ -80,7 +82,7 @@ Se define a la audiencia como la comunidad peruana organizadora de torneos de ES
 
 **¿Qué información se desea aportar al final del estudio?**  
 
-Ver cuáles son los factores que hacen que la NBA sea la liga más competitiva de basketball, además de tener las mejores estrellas de este deporte. Una de las variables que se estudian son el sueldo que reciben, equipos al que pertenecen, edades, lugares de vivencia y nacimiento, etc.
+Mostrar los factores que convierten a la NBA sea la liga más competitiva de baloncesto además analizar las características de cada jugador y predecir la trayectoria las mejores estrellas de este deporte.
 
 En términos general se busca mostrar:
 
@@ -94,34 +96,48 @@ En términos general se busca mostrar:
 ### Proveniencia y disponibilidad de los datos
 **¿Es posible llegar a la información que se propone de manera específica y concreta?**
 
-  Para este estudio se esta usando la base de datos Kaggle.com, una fuente confiable y segura, cada unidad muestral completa y variables categóricas y numéricas. link de la base: https://www.kaggle.com/wyattowalsh/basketball 
-  
-Los datos serán recolectado de tres diferentes conjuntos de bases de datos:  
+Los datos serán recolectados de la siguiente base de datos:  
 
-- [Top 100 Highest Overall Esport Team Earnings](https://www.kaggle.com/chanoncharuchinda/top-100-highest-overall-esport-team-earning?select=ESPORT+Team+Dataset)
-  - Obtenida de kaggle.com con licencia CC0.
-  - Data tomada de https://www.esportsearnings.com/teams/highest-overall.
-  - Última actualización: 12 de septiembre del 2021.
-- [eSports Earnings](https://www.kaggle.com/jackdaoud/esports-earnings-for-players-teams-by-game?select=country-and-continent-codes-list.csv)
-  - Obtenida de kaggle.com con licencia CC0.
-  - Data tomada de https://www.esportsearnings.com.
-  - Última actualización: Enero 2021
-- [Esports Earnings 1998 - 2021](https://www.kaggle.com/rankirsh/esports-earnings?select=HistoricalEsportData.csv)
-  - Obtenida de kaggle.com con licencia CC0.
-  - Data tomada de https://www.esportsearnings.com.
-  - Última actualización: 30 de agosto del 2021.
+- [Basketball Dataset](https://www.kaggle.com/wyattowalsh/basketball)
+  - Obtenida de https://www.kaggle.com con licencia CC BY-SA 4.0.
+  - Data tomada de https://www.nba.com/stats/.
+  - Última actualización: 15 de septiembre del 2021.
 
 Se analizarán datos como:
 
-- Número de competiciones realizadas en cada país desde el año 1998.
-- Número de competiciones realizadas por cada videojuego.
-- Cantidad de ingresos generados en torneos por cada videojuego.
-- Cantidad de ingresos generados por cada jugador profesional.
-- Cantidad de ingresos generados por cada equipo profesional.
+- Juegos en los que participaron en una temporada cada equipo.
+- Los nombres, equipos y juegos en los cuales un jugador participó y no participó.
+- Salario de cada jugador y tipo de contrato.
+- Salario de cada equipo.
+- Fundador, estadio, año de fundación y ciudad de cada equipo.
 
 ## Tema N°3: ¿Cómo afecta el consumo de frutos secos en la alimentación de los alumnos de UTEC?
 
-Consumo en cantidades medidas es beneficioso.
-Demostrar que el consumo de frutos secos mejora los hábitos alimenticios de los alumnos.
-Mejora la concentración de los alumnos en sus clases.
+---------------
 
+### Relevancia
+
+**¿Es el estudio de interés para la audiencia?**
+
+Como afecta el consumo de frutos secos en la alimentación de los alumnos de UTEC
+
+Relevancia de estudio: La alimentación es un pilar importante para los estudiantes, ya que estar bien alimentados significa tener la energía suficiente para cumplir con tu rutina diaria de clases, además de beneficiar la salud de los mismos. Por ese motivo, el consumo de frutos secos es altamente recomendable en las dietas de los estudiantes, ya que se sabe que disminuyen los niveles de colesterol, disminuye el riesgo de diabetes tipo 2 y es altamente saciante. Además, ayuda a prevenir la obesidad, así como, reduce el consumo de alimentos procesados. Conocer como afecta el consumo de estos frutos en los estudiantes conociendo sus hábitos alimenticios es nuestro objetivo principal. 
+
+**¿Qué información se desea aportar al final del estudio?**  
+
+---------------
+
+### Proveniencia y disponibilidad de los datos
+
+Proveniencia y disponibilidad de datos: Los datos serán aportados por los estudiantes de UTEC dispuestos a aportar a este estudio. 
+
+Los datos a tomar en cuenta serán: 
+Talla
+Peso
+Edad
+Ciclo 
+Género
+Hábitos alimenticios 
+Frecuencia de consumo de frutos secos
+Cantidad de consumo de frutos secos
+Tipos de frutos secos que consumen
