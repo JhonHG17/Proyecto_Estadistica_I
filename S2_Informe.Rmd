@@ -5,34 +5,119 @@ output: html_notebook
 
 ## Tema N°1: Torneos de ESports
 
+---------------
+
 ### Relevancia
 
-- ¿Es el estudio de interés para la audiencia?
+ESports o electronic sports son competiciones de videojuegos que se han convertido en eventos de gran popularidad en Europa, Asia y Norte América, siendo en Latinoamérica estos eventos también cada vez más notorios y comunes.  
+Es así que el siguiente estudio busca demostrar el crecimiento exponencial de estas competiciones y ofrecer información valiosa a organizaciones peruanas de ESports, medios de comunicación o cualquier entidad interesada. 
 
-  Se define a la audiencia como la comunidad peruana organizadora de torneos de ESports. Y se considera de su interés el conocer:
-  - El crecimiento del mercado global de ESports en los últimos 20 años.
-  - La cantidad de ingresos obtenidos en cada torneo.
-  - Un conjunto de datos de los jugadores profesionales de ESports
-  - Un conjunto de datos de los equipos profesionales de ESports
-  - La cantidad de ingresos obtenidos por cada jugador de ESports
-  - La cantidad de ingresos obtenidos por cada equipo de ESports
-  - La cantidad de ingresos generados por cada videojuego en cada torneo.
+**¿Es el estudio de interés para la audiencia?**
 
-- ¿Qué información se desea aportar al final del estudio?
-  ´
+Se define a la audiencia como la comunidad peruana organizadora de torneos de ESports. Y se considera de su interés el conocer:
+- El crecimiento del mercado global de ESports en los últimos 20 años.
+- La cantidad de ingresos obtenidos en cada torneo.
+- Un conjunto de datos de los jugadores profesionales de ESports.
+- Un conjunto de datos de los equipos profesionales de ESports.
+- La cantidad de ingresos obtenidos por cada jugador de ESports.
+- La cantidad de ingresos obtenidos por cada equipo de ESports.
+- La cantidad de ingresos generados por cada videojuego en cada torneo.  
 
+**¿Qué información se desea aportar al final del estudio?**  
 
+En términos general se busca mostrar:
 
+- El crecimiento exponencial del número de competiciones de ESport.
+- El incentivo económico de participar en las competiciones.
+- El interés actual de diferentes países latinoamericanos en ESport.
+- La relevancia de cada videojuego para los eventos ESports y determinar cuál es el videojuego que conviene escoger para organizar una competencia en Perú.
+
+---------------
 
 ### Proveniencia y disponibilidad de los datos
-¿Es posible llegar a la información que se propone de manera específica y concreta?
+**¿Es posible llegar a la información que se propone de manera específica y concreta?**
 
-Se ha obtenido tres diferentes conjuntos de bases de datos 
-[Top 100 Highest Overall Esport Team Earnings](https://www.kaggle.com/chanoncharuchinda/top-100-highest-overall-esport-team-earning?select=ESPORT+Team+Dataset)  
-[eSports Earnings](https://www.kaggle.com/jackdaoud/esports-earnings-for-players-teams-by-game?select=country-and-continent-codes-list.csv)  
-[Esports Earnings 1998 - 2021](https://www.kaggle.com/rankirsh/esports-earnings?select=HistoricalEsportData.csv)  
+Los datos serán recolectado de tres diferentes conjuntos de bases de datos:  
+
+- [Top 100 Highest Overall Esport Team Earnings](https://www.kaggle.com/chanoncharuchinda/top-100-highest-overall-esport-team-earning?select=ESPORT+Team+Dataset)
+  - Obtenida de kaggle.com con licencia CC0.
+  - Data tomada de https://www.esportsearnings.com/teams/highest-overall.
+  - Última actualización: 12 de septiembre del 2021.
+- [eSports Earnings](https://www.kaggle.com/jackdaoud/esports-earnings-for-players-teams-by-game?select=country-and-continent-codes-list.csv)
+  - Obtenida de kaggle.com con licencia CC0.
+  - Data tomada de https://www.esportsearnings.com.
+  - Última actualización: Enero 2021
+- [Esports Earnings 1998 - 2021](https://www.kaggle.com/rankirsh/esports-earnings?select=HistoricalEsportData.csv)
+  - Obtenida de kaggle.com con licencia CC0.
+  - Data tomada de https://www.esportsearnings.com.
+  - Última actualización: 30 de agosto del 2021.
+
+Se analizarán datos como:
+
+- Número de competiciones realizadas en cada país desde el año 1998.
+- Número de competiciones realizadas por cada videojuego.
+- Cantidad de ingresos generados en torneos por cada videojuego.
+- Cantidad de ingresos generados por cada jugador profesional.
+- Cantidad de ingresos generados por cada equipo profesional.
+
 
 ## Tema N°2: NBA Basketball
+
+### Relevancia
+
+Este estudio estadístico es de interés para medir la calidad de los jugadores de la NBA para otras ligas de Basketball como ACB, EBA, LEB Oro mejoren su calidad deportiva 
+
+**¿Es el estudio de interés para la audiencia?**
+
+Se define a la audiencia como la comunidad peruana organizadora de torneos de ESports. Y se considera de su interés el conocer:
+- El crecimiento del mercado global de ESports en los últimos 20 años.
+- La cantidad de ingresos obtenidos en cada torneo.
+- Un conjunto de datos de los jugadores profesionales de ESports.
+- Un conjunto de datos de los equipos profesionales de ESports.
+- La cantidad de ingresos obtenidos por cada jugador de ESports.
+- La cantidad de ingresos obtenidos por cada equipo de ESports.
+- La cantidad de ingresos generados por cada videojuego en cada torneo.  
+
+**¿Qué información se desea aportar al final del estudio?**  
+
+Ver cuáles son los factores que hacen que la NBA sea la liga más competitiva de basketball, además de tener las mejores estrellas de este deporte. Una de las variables que se estudian son el sueldo que reciben, equipos al que pertenecen, edades, lugares de vivencia y nacimiento, etc.
+
+En términos general se busca mostrar:
+
+- El crecimiento exponencial del número de competiciones de ESport.
+- El incentivo económico de participar en las competiciones.
+- El interés actual de diferentes países latinoamericanos en ESport.
+- La relevancia de cada videojuego para los eventos ESports y determinar cuál es el videojuego que conviene escoger para organizar una competencia en Perú.
+
+---------------
+
+### Proveniencia y disponibilidad de los datos
+**¿Es posible llegar a la información que se propone de manera específica y concreta?**
+
+  Para este estudio se esta usando la base de datos Kaggle.com, una fuente confiable y segura, cada unidad muestral completa y variables categóricas y numéricas. link de la base: https://www.kaggle.com/wyattowalsh/basketball 
+  
+Los datos serán recolectado de tres diferentes conjuntos de bases de datos:  
+
+- [Top 100 Highest Overall Esport Team Earnings](https://www.kaggle.com/chanoncharuchinda/top-100-highest-overall-esport-team-earning?select=ESPORT+Team+Dataset)
+  - Obtenida de kaggle.com con licencia CC0.
+  - Data tomada de https://www.esportsearnings.com/teams/highest-overall.
+  - Última actualización: 12 de septiembre del 2021.
+- [eSports Earnings](https://www.kaggle.com/jackdaoud/esports-earnings-for-players-teams-by-game?select=country-and-continent-codes-list.csv)
+  - Obtenida de kaggle.com con licencia CC0.
+  - Data tomada de https://www.esportsearnings.com.
+  - Última actualización: Enero 2021
+- [Esports Earnings 1998 - 2021](https://www.kaggle.com/rankirsh/esports-earnings?select=HistoricalEsportData.csv)
+  - Obtenida de kaggle.com con licencia CC0.
+  - Data tomada de https://www.esportsearnings.com.
+  - Última actualización: 30 de agosto del 2021.
+
+Se analizarán datos como:
+
+- Número de competiciones realizadas en cada país desde el año 1998.
+- Número de competiciones realizadas por cada videojuego.
+- Cantidad de ingresos generados en torneos por cada videojuego.
+- Cantidad de ingresos generados por cada jugador profesional.
+- Cantidad de ingresos generados por cada equipo profesional.
 
 ## Tema N°3: ¿Cómo afecta el consumo de frutos secos en la alimentación de los alumnos de UTEC?
 
