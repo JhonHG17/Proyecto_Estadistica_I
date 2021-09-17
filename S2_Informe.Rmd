@@ -120,9 +120,17 @@ Se analizarán datos como:
 
 La alimentación es un pilar importante para los estudiantes, ya que estar bien alimentados significa tener la energía suficiente para cumplir con tu rutina diaria de clases, además de beneficiar la salud de los mismos. Por ese motivo, el consumo de frutos secos es altamente recomendable en las dietas de los estudiantes, ya que se sabe que disminuyen los niveles de colesterol, disminuye el riesgo de diabetes tipo 2 y es altamente saciante. Además, ayuda a prevenir la obesidad, así como, reduce el consumo de alimentos procesados. Conocer como afecta el consumo de estos frutos en los estudiantes conociendo sus hábitos alimenticios es nuestro objetivo principal. 
 
+**¿Es el estudio de interés para la audiencia?**
+
+Sí, porque al mostrar como influye de manera positiva los frutos secos en la alimentación de los estudiantes, no solo mejoraría directamente su salud mediante el mejoramiento de hábitos alimenticios, sino que indirectamente mejorarían en el aspecto académico, ya que una mejor alimentación, significa más energía y un mejor estado de ánimo para desarrollar nuestras actividades. 
+
+**¿Qué información se desea aportar al final del estudio?**  
+
+La información recolectada mediante encuestas, de forma cuantitativa, cómo afecta el consumo de frutos secos en el bienestar de los estudiantes. 
+
 ### Proveniencia y disponibilidad de los datos
 
-Los datos serán aportados por los estudiantes de UTEC dispuestos a aportar a este estudio. 
+Los datos serán aportados por los estudiantes de UTEC dispuestos a aportar a este estudio mediante encuestas. 
 
 Los datos a tomar en cuenta serán: 
 - Talla
@@ -134,14 +142,6 @@ Los datos a tomar en cuenta serán:
 - Frecuencia de consumo de frutos secos
 - Cantidad de consumo de frutos secos
 - Tipos de frutos secos que consumen
-
-**¿Es el estudio de interés para la audiencia?**
-
-Sí, porque al mostrar como influye de manera positiva los frutos secos en la alimentación de los estudiantes, no solo mejoraría directamente su salud mediante el mejoramiento de hábitos alimenticios, sino que indirectamente mejorarían en el aspecto académico, ya que una mejor alimentación, significa más energía y un mejor estado de ánimo para desarrollar nuestras actividades. 
-
-**¿Qué información se desea aportar al final del estudio?**  
-
-La información recolectada mediante encuestas, de forma cuantitativa, cómo afecta el consumo de frutos secos en el bienestar de los estudiantes. 
 
 **¿Es posible llegar a la información que se propone de manera específica  y concreta?**
 
