@@ -67,29 +67,27 @@ Se analizarán datos como:
 
 ### Relevancia
 
-Este estudio estadístico es de interés para medir la calidad de los jugadores de la NBA para otras ligas de Basketball como ACB, EBA, LEB Oro mejoren su calidad deportiva 
+La National Basketball Association (NBA) es una liga profesional localizada en Estado Unidos y se compone de los mejores equipos de basketball. en el mundo. Este estudio estadístico es relevante en el sentido de que busca determinar que atributos de los jugadores de la NBA son deseados para otro conjunto de ligas de baloncesto como la liga nacional de basketball (LNB) en Perú.
 
 **¿Es el estudio de interés para la audiencia?**
 
-Se define a la audiencia como la comunidad peruana organizadora de torneos de ESports. Y se considera de su interés el conocer:
-- El crecimiento del mercado global de ESports en los últimos 20 años.
-- La cantidad de ingresos obtenidos en cada torneo.
-- Un conjunto de datos de los jugadores profesionales de ESports.
-- Un conjunto de datos de los equipos profesionales de ESports.
-- La cantidad de ingresos obtenidos por cada jugador de ESports.
-- La cantidad de ingresos obtenidos por cada equipo de ESports.
-- La cantidad de ingresos generados por cada videojuego en cada torneo.  
+Se define a la audiencia como la liga nacional de basketball. Y se considera de su interés el conocer:
+- La cantidad de ingresos obtenidos en cada temporada de la NBA.
+- Un conjunto de datos de los jugadores profesionales que participaron en cada temporada.
+- Un conjunto de datos de los equipos profesionales que participaron en cada temporada.
+- El salario de cada jugador de la NBA.
+- El salario de cada equipo de la NBA.
 
 **¿Qué información se desea aportar al final del estudio?**  
 
-Mostrar los factores que convierten a la NBA sea la liga más competitiva de baloncesto además analizar las características de cada jugador y predecir la trayectoria las mejores estrellas de este deporte.
+Mostrar los factores que convierten a la NBA en la liga más competitiva de basketball. Asimismo, analizar las características de cada jugador y predecir la trayectoria las mejores estrellas de este deporte.
 
 En términos general se busca mostrar:
 
-- El crecimiento exponencial del número de competiciones de ESport.
-- El incentivo económico de participar en las competiciones.
-- El interés actual de diferentes países latinoamericanos en ESport.
-- La relevancia de cada videojuego para los eventos ESports y determinar cuál es el videojuego que conviene escoger para organizar una competencia en Perú.
+- El aumento de número de equipos de basketball.
+- El incentivo económico de los jugadores que participan en cada temporada.
+- El incentivo económico de los económico que participan en cada temporada.
+- El interés actual por el deporte en Estados Unidos.
 
 ---------------
 
@@ -122,9 +120,10 @@ La alimentación es un pilar importante para los estudiantes, ya que estar bien 
 
 ### Proveniencia y disponibilidad de los datos
 
-Los datos serán aportados por los estudiantes de UTEC dispuestos a aportar a este estudio. 
+Los datos serán aportados por los estudiantes de UTEC dispuestos a participar en el estudio. 
 
-Los datos a tomar en cuenta serán: 
+Los datos a tomar en cuenta serán:
+
 - Talla
 - Peso
 - Edad
