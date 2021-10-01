@@ -1,5 +1,5 @@
 ---
-title: "S2 - Crecimiento económico de los E-sports en los EEUU"
+title: "S2 - Crecimiento económico de los E-sports en los Estados Unidos"
 output: html_notebook
 ---
 
@@ -54,8 +54,91 @@ El proyecto es ejecutable gracias a la información proporcionada de “cada equ
 ```{r}
 Tipo <- read_csv("GeneralEsportData.csv")
 Fechas <- read_csv("HistoricalEsportData.csv")
-Monto <- read_csv("Highest_earning_teams")
+Monto <- read_csv("Highest_earning_teams.csv")
+Competitive <- read_csv("competitive_game.csv")
 
 ```
+# 2 Presentación de las variables y parámetros de estudio
+
+## 2.1 Variables del estudio
+
+### Tipo de juego - Game
+
+
+
+### Ingresos o ganancias - TotalEarnings
+
+
+### Ganacias virtuales - OnlineEarnings
+
+
+### Numero de jugardores por el tipo de juego - Players
+
+
+### Ganancias generadas por numero de torneos - Earnings
+
+
+### Tournaments - Torneos
+
+
+### Fecha de cada torneo - Date
+
+
+### Año - ReleaseDate
+
+
+
+## 2.2 Presentación de las variables y parámetros de estudio
+### 2.2.1 Descriptores numéricos
+
+Hallamos media
+
+```{r}
+
+mediaTotalEarnings = mean(Tipo$TotalEarnings)
+
+round(mediaTotalEarnings,2)
+
+```
+
+Hallamos media
+```{r}
+mediaOnlineEarnings = mean(Tipo$OnlineEarnings, na.rm=TRUE)
+round(mediaOnlineEarnings,2)
+
+```
+
+Hallamos media
+
+```{r}
+mediaPlayers = mean(Tipo$TotalPlayers, na.rm = TRUE)
+
+round(mediaPlayers,2)
+
+```
+Hallamos media
+
+```{r}
+mediaEarningsTor = mean(Fechas$Earnings, na.rm = TRUE)
+round(mediaEarningsTor,2)
+```
+
+Hallamos moda en la unidad
+
+```{r}
+
+modaJuego = mfv(Fechas$Game)
+modaJuego
+
+```
+
+### 2.2.2 Descriptores gráficos
+
+
+Gráfico de ganancias por cada juego durante las fechas de los torneos
+
+
+
+Boxplot del tipo juegos que recaudo mas por cada torneo
 
 
