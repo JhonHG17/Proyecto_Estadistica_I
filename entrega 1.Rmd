@@ -1,0 +1,61 @@
+---
+title: "S2 - Crecimiento económico de los E-sports en los EEUU"
+output: html_notebook
+---
+
+## Grupo N°2
+
+### Integrantes:
+
+- Dominguez Aspilcueta, Pedro Francisco 
+- Del Olmo Dulong, Juan Ignacio
+- Chamorro Torres, Jean Pierre
+- Munguia Cruzatt, Mauro Sthepano
+- Ramos Torres, Guido Antonio **(Líder)**
+
+
+```{r ,message = FALSE, echo = FALSE, results = FALSE, warning=FALSE}
+library("readr")
+library("utf8")
+library("modeest")
+library("dplyr")
+library("ggplot2")
+library("plotly")
+```
+# 1 Introducción
+
+El tema que trata nuestra investigación es el incremento económico de los equipos de E-sports en los Estados unidos, el periodo considerado fue los años 2019 y 2020 donde se pudo apreciar la influencia de la pandemia, para un mejor estudio consideramos los torneos internacionales que se realizaron durante esos años.  
+
+## 1.1 Importancia
+
+Esta investigación es importante ya que los equipos de E-sport peruanos se encuentra en proceso de desarrollo y son de diferentes localidades de Lima, como son las casas de juegos o “Gaming House”. Además, en diferentes partes de nuestra localidad de Lima, como son las cabinas de internet y casas de juegos pequeños. Además, estos juegos que presentamos son de consumo muy recurrente en jóvenes adolescentes y sobre todo es un campo muy competitivo. Así pues, la alta demanda de equipos provoca la posibilidad de encontrar tendencias favorables en cuanto a la economía ya que puede ayudar a los pequeños empresarios en poder invertir en esta nueva moda sobre los video juegos. 
+
+## 1.2 Objetivos del estudio
+Nuestros objetivos se pueden resumir en tres:
+Hallar relaciones económicas entre juego y grupo de hereditario de jóvenes, por cada torneo ejecutado.
+Proporcionar información sobre el comportamiento y tiempo de ejecución de cada juego, para hallar un balance entre el tiempo de cada juego contra el monto ganado por torneo.
+Realizar una predicción para ser de utilidad en la toma de decisiones al momento de invertir un capital en un equipo de E-sports. 
+
+
+## 1.3 Factibilidad
+El proyecto es ejecutable gracias a la información proporcionada de “cada equipo y sobre todo a la información sobre la acción del juego en cada torneo, donde la información recabada se encuentra en una página de divulgación electrónica, Kaggle. Estos datos son específicos para abastecer la información sobre los montos ganados por cada equipo durante los torneos 2019 y 2020.
+
+## 1.4 Preguntas para encontrar la información
+
+- ¿La categoría del juego influye de manera positiva o negativa en la cantidad de dinero que puede ganar el jugador?
+
+-¿La categoría del juego influye de manera positiva o negativa en la cantidad de dinero que puede ganar un equipo?
+
+-¿La nacionalidad del jugador esta relacionado con la cantidad de dinero que genera?
+
+- ¿El hecho de que haya aumentado el número de torneos a lo largo de los años ha permitido que aumente el número diferente de jugadores que han generado ingresos?
+
+
+```{r}
+Tipo <- read_csv("GeneralEsportData.csv")
+Fechas <- read_csv("HistoricalEsportData.csv")
+Monto <- read_csv("Highest_earning_teams")
+
+```
+
+
