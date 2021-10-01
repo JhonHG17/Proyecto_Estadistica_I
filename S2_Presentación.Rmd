@@ -1,6 +1,8 @@
 ---
 title: "S2 - Crecimiento económico de los E-sports en los Estados Unidos"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
 
 ## Grupo N°2
@@ -52,6 +54,10 @@ El proyecto es factible debido a tres bases de datos obtenida de la página de d
 
 - ¿El hecho de que haya aumentado el número de torneos a lo largo de los años ha permitido que aumente el número diferente de jugadores que han generado ingresos?
 
+- ¿La cantidad de torneos donde participan los jugadores está relacionado con la cantidad de dinero generado? 
+
+- ¿La cantidad de torneos donde participan los  equipos está relacionado con la cantidad de dinero generado? 
+
 
 ```{r}
 Tipo <- read_csv("GeneralEsportData.csv")
@@ -79,8 +85,7 @@ Competitive <- read_csv("competitive_game.csv")
 
 ## 2.2 Descriptores numéricos
 
-Hallamos media
-
+TotalEarnings
 ```{r}
 
 mediaTotalEarnings = mean(Tipo$TotalEarnings)
@@ -88,30 +93,38 @@ mediaTotalEarnings = mean(Tipo$TotalEarnings)
 round(mediaTotalEarnings,2)
 
 ```
+La media es la más adecuada, ya que, al tratarse de dinero como un volumen de ingreso, lo que nos interesa saber es cuanta es la cantidad total de ingreso por torneo. Dado que el ingreso es acumulativo, se debe incluir todos los datos atípicos para que la media sea menos robusta. Este es un valor que representa el ingreso total de cada juego previo a la medición y tiene ventaja si se le multiplica por la cantidad de observaciones.
 
-Hallamos media
+
+OnlineEarnings
+
 ```{r}
 mediaOnlineEarnings = mean(Tipo$OnlineEarnings, na.rm=TRUE)
 round(mediaOnlineEarnings,2)
 
 ```
+Al igual que el caso anterior determinar la media adecuada es al igual una variable que tiene referencia a la cantidad de ingresos en dólares de los equipos de video juegos. La media en este casi representa el ingreso casi diarios de cada tipo de juegos.
 
-Hallamos media
+Players
 
 ```{r}
 mediaPlayers = mean(Tipo$TotalPlayers, na.rm = TRUE)
 
-round(mediaPlayers,2)
+round(mediaPlayers,0)
 
 ```
-Hallamos media
+Dado de que se trata de personas, decidimos usar la media. De esta manera obtenemos un valor que representa el numero de participantes en cada tipo de juego, Además, si esta valor es multiplicado por la observaciones se obtiene el volumen de ingreso por equipo.
+
+EarningsTor
 
 ```{r}
 mediaEarningsTor = mean(Fechas$Earnings, na.rm = TRUE)
 round(mediaEarningsTor,2)
 ```
+Esto representa la cantidad media de los torneos durante la fecha establecida.
 
-Hallamos moda en la unidad
+
+Juego
 
 ```{r}
 
@@ -119,14 +132,20 @@ modaJuego = mfv(Fechas$Game)
 modaJuego
 
 ```
+Aquí es mejor la moda por que nos interesa saber el juego que mas se consume. No se uso moda en la variables por no considerar valores muy extremos.
+
 
 ### 2.3 Descriptores gráficos
 
 
-Gráfico de ganancias por cada juego durante las fechas de los torneos
-
-
-
 Boxplot del tipo juegos que recaudo mas por cada torneo
 
+```{r}
+boxplot(Tipo$TotalTournaments)
+```
+
+
+```{r}
+boxplot(Fechas$Players)
+```
 
