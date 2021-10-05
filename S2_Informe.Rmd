@@ -1,0 +1,214 @@
+---
+title: "S2 - Crecimiento económico de los E-sports en los Estados Unidos"
+output:
+  html_document:
+    df_print: paged
+---
+
+## Grupo N°2
+
+### Integrantes:
+
+- Dominguez Aspilcueta, Pedro Francisco 
+- Del Olmo Dulong, Juan Ignacio
+- Chamorro Torres, Jean Pierre
+- Munguia Cruzatt, Mauro Sthepano
+- Ramos Torres, Guido Antonio **(Líder)**
+
+
+```{r echo=FALSE, warning=FALSE, ,message=FALSE, results=FALSE}
+library("readr")
+library("utf8")
+library("modeest")
+library("dplyr")
+library("ggplot2")
+```
+
+```{r echo=FALSE, warning=FALSE, ,message=FALSE, results=FALSE}
+Juegos <- read_csv("GeneralEsportData.csv")
+Historico <- read_csv("HistoricalEsportData.csv")
+Equipos <- read_csv("highest_earning_teams.csv")
+Jugadores <- read_csv("highest_earning_players.csv")
+Competitive <- read_csv("competitive_game.csv")
+```
+
+```{r echo=FALSE, warning=FALSE, ,message=FALSE, results=FALSE}
+# Renombrado de atributos 
+Juegos %>% rename(Juego = Game, AñoLanzamiento = ReleaseDate, Premios = TotalEarnings, PremiosOnline = OnlineEarnings, JugadoresGanadores = TotalPlayers, Torneos = TotalTournaments) -> JuegosN
+
+Jugadores %>% rename(JugadorID = PlayerId, Nombre = NameFirst, Apellido = NameLast, Usuario = CurrentHandle, CodigoPais = CountryCode, IngresosTotal = TotalUSDPrize, Juego = Game) -> JugadoresN
+
+Historico %>% rename(Fecha = Date, Juego = Game, Premios = Earnings, NumeroJugadoresGanadores = Players, Torneos = Tournaments) -> HistoricoN
+
+Equipos %>% rename(EquipoID = TeamId, Nombre = TeamName, MontoGanado = TotalUSDPrize, Juego = Game, GeneroJuego = Genre, TorneosGanados = TotalTournaments) -> EquiposN
+
+Competitive %>% rename(Juego = Game, MontoGanado = `Total Money Earned`, PorcentajeMontoTotalGanado = `Total Money Earned Percentage`, Equipo = Team) -> CompetitiveN
+```
+
+
+```{r echo=FALSE, warning=FALSE, ,message=FALSE, results=FALSE}
+# Limpieza de datos
+# Juegos
+select(JuegosN, -Genre) -> JuegosN
+JuegosN$Premios[JuegosN$Premios <= 100] <- NA
+JuegosN$PremiosOnline[JuegosN$PremiosOnline <= 100] <- NA
+JuegosN$JugadoresGanadores[JuegosN$JugadoresGanadores == 0] <- NA
+JuegosN$Torneos[JuegosN$Torneos == 0] <- NA
+summary(JuegosN)
+
+# Jugadores
+summary(JugadoresN)
+
+# Equipos
+summary(EquiposN)
+
+# Competitive #Falta cómo limpiar el porcentaje
+CompetitiveN$MontoGanado = as.numeric(gsub("[\\$,]", "",  CompetitiveN$MontoGanado))
+CompetitiveN$MontoGanado[CompetitiveN$MontoGanado == 0] <- NA
+summary(CompetitiveN)
+
+#Histórico
+HistoricoN$Premios[HistoricoN$Premios <= 100] <- NA
+HistoricoN$NumeroJugadoresGanadores[HistoricoN$NumeroJugadoresGanadores == 0] <- NA
+summary(HistoricoN)
+
+```
+
+# 1 Introducción
+
+El tema que trata nuestra investigación es sobre la variación económica de los equipos y jugadores de E-sports en los Estados unidos entre los años 2019 y 2020.
+Para realizar un estudio más completo también se consideran los torneos internacionales en los que participaron jugadores y equipos estadounidenses.
+
+## 1.1 Importancia
+
+La investigación es de importancia para los equipos de E-sport peruanos en proceso de crecimiento, por ejemplo: las casas de juegos o “Gaming Houses'”, torneos locales, torneos entre universidades. Estos torneos son de consumo recurrente en jóvenes adolescentes y muy competitivos. Es así que la alta demanda de equipos muestra tendencias favorables de inversión que podrían ser de valor para pequeños empresarios que están interesados en el mercado E-sport. 
+
+Mostrar el crecimiento económico de las E-sports en otros países podría disponer de un mayor panorama para las empresas nacionales interesadas en desarrollar este tipo de torneos en el país. 
+
+## 1.2 Objetivos del estudio
+Nuestros objetivos se pueden resumir en tres:
+Hallar relaciones económicas entre juego y grupo de hereditario de jóvenes, por cada torneo ejecutado.
+Proporcionar información sobre el comportamiento y tiempo de ejecución de cada juego, para hallar un balance entre el tiempo de cada juego contra el monto ganado por torneo.
+Realizar una predicción para ser de utilidad en la toma de decisiones al momento de invertir un capital en un equipo de E-sports. 
+
+
+## 1.3 Factibilidad
+El proyecto es factible debido a tres bases de datos obtenida de la página de divulgación electrónica, Kaggle. Los datos sobre la cantidad de torneos y los premios monetarios son necesarios para obtener la información específica del dinero generado  por cada equipo y jugadores durante los torneos en el periodo 2019-2020.
+
+## 1.4 Hipótesis
+
+- ¿La categoría del juego influye de manera positiva o negativa en la cantidad de dinero que puede ganar un jugador?
+
+- ¿La categoría del juego influye de manera positiva o negativa en la cantidad de dinero que puede ganar un equipo?
+
+- ¿La nacionalidad del jugador esta relacionado con la cantidad de dinero que genera?
+
+- ¿Han aumentado el número de jugadores a lo largo de los años?
+
+- Si han aumentado el número de torneos, ¿el hecho de que haya aumentado el número de torneos a lo largo de los años ha permitido que aumente el número diferente de jugadores que han generado ingresos?
+
+- ¿Un aumento del número de torneos por año se relaciona con el monto de dinero en premios que los jugadores que participan pueden ganar? 
+
+
+
+# 2 Presentación de las variables y parámetros de estudio
+
+## 2.1 Variables del estudio
+
+## 2.1 Variables del estudio
+
+| Pregunta | Variable | Tipo de variable | Restricciones |
+| ----------- | ----------- | ----------- | ----------- |
+| ¿Cuál es el nombre del juego?      | Juego       | Nominal  | Juegos que al menos hayan tenido un torneo|
+| ¿Cuál es el monto de premios total en todos sus torneos?    | Premios | Continua | Real mayor a cero|
+|¿Cuál es el monto de premios total en torneos en línea?  | Premios Online| Continua | Real mayor a cero |
+| Por cada juego, ¿cuántos jugadores han ganado torneos? | Número de jugadores ganadores | Discreta | Entero mayor a cero |
+| Por cada juego, ¿cuánto ha ganado cada equipo de E-sport? | Monto ganado por equipos | Continua | Real mayor a cero |
+| Por cada juego, ¿cuánto dinero total se ha premiado? | Ganancias totales | Continua | Real mayor a cero | 
+| Por cada juego, ¿cuántos torneos se realizaron en un período?  | Número de torneos | Discreta | Real mayor a cero |
+| Por cada juego, ¿en qué mes y año se realizaron sus torneos? | Fecha de cada torneo | Ordinal | Años entre 2019 a 2020 |
+| ¿Cuál es el año de lanzamiento del juego? | Año de lanzamiento | Ordinal | Después de 1980 |
+| Por cada jugador, ¿cuánto ha generado por juego? | Ganancias por jugadores  | Continua | Real mayor a cero |
+| Por cada equipo, ¿cuánto ha generado por todos los juegos que ha participado? | Ganancias por equipo| Continua |Real mayor a cero |
+| ¿Cuál es el nombre de usuario del jugador?  | Usuario |  Nominal | Jugador que haya participado en al menos un torneo |
+
+
+## 2.2 Descriptores numéricos
+
+```{r}
+summary(Juegos)
+```
+
+
+Media de premios totales ofrecidos por juego
+```{r}
+
+mediaTotalEarnings = mean(Juegos$TotalEarnings)
+
+round(mediaTotalEarnings,2)
+
+```
+
+
+Media de premios totales ofrecidos en un torneo en línea por juego
+```{r}
+mediaPremiosOnline = round(mean(JuegosN$PremiosOnline, na.rm=TRUE), 2)
+```
+
+Media de jugadores que han ganado al menos un torneo por juego
+
+```{r}
+mediaGanadores = mean(JuegosN$JugadoresGanadores, na.rm = TRUE)
+
+round(mediaGanadores,0)
+
+```
+
+Media de jugadores que han ganado un torneo por mes
+```{r}
+mediaJugadores = round(mean(HistoricoN$NumeroJugadoresGanadores, na.rm = TRUE), 2)
+mediaJugadores
+```
+Juego con más torneos organizados en un rango mayor de tiempo
+
+```{r}
+getmode <- function(v) {
+   uniqv <- unique(v)
+   uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+modaJuego = getmode(HistoricoN$Juego)
+modaJuego
+```
+La moda es de interés porque indica el juego con mayor tiempo realizando torneos.
+
+
+### 2.3 Descriptores gráficos
+
+La siguiente gráfica describe si existe una correlación entre el número de torneos realizados por un juego y la cantidad de jugadores que han ganado al menos un torneo. Es interesante observar cómo existen juegos con más de 100 torneos diferentes en los cuales existen entre 200 a 600 jugadores ganadores.
+
+```{r}
+plot(JuegosN$Torneos, JuegosN$JugadoresGanadores, xlab = "Torneos", ylab = "Jugadores ganadores", xlim = c(1,100), ylim = c(1, 1000))
+```
+
+En esta gráfica se busca encontrar una relación entre la fecha de lanzamiento de un juego y el monto total de premios ofrecidos en sus torneos. Tal relación parece no existir, sin embargo, se observa que los juegos que ofrecen premios en sus torneos en su mayoría son de la última decada.
+
+```{r}
+plot(JuegosN$AñoLanzamiento, JuegosN$Premios, xlab = "Año del juego", ylab = "Premio monetario", xlim = c(1990, 2021), ylim = c(1, 10000))
+```
+
+En esta gráfica se observa la cantidad de equipos que han ganado al menos un torneo por cada juego. Se observa múltiples equipos que han participado en 5 diferentes juegos y se infiere que es raro que un equipo se dedique de manera exclusiva a un juego. 
+
+```{r}
+hist(table(CompetitiveN$Equipo), breaks = 20, xlab = "Equipos", ylab = "Juegos", main = "Histograma de equipos-juegos")
+```
+
+La siguiente gráfica muestra la cantidad de torneos ganados por un equipo de E-sports en un juego y el monto total obtenido en premios. Se observa que existen juegos que ofrecen un monto total mayor en premios aún si no han realizado muchos torneos. 
+
+```{r}
+plot(EquiposN$TorneosGanados, EquiposN$MontoGanado,
+     xlab = "Número de torneos ganados",
+     ylab = "Monto de los premios",
+     xlim = c(1, 100),
+     ylim = c(1, 1000000))
+```
+
