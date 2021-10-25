@@ -187,25 +187,27 @@ La moda es de interés porque indica el juego con mayor tiempo realizando torneo
 La siguiente gráfica describe si existe una correlación entre el número de torneos realizados por un juego y la cantidad de jugadores que han ganado al menos un torneo. Es interesante observar cómo existen juegos con más de 100 torneos diferentes en los cuales existen entre 200 a 600 jugadores ganadores.
 
 ```{r}
-plot(JuegosN$Torneos, JuegosN$JugadoresGanadores, xlab = "Torneos", ylab = "Jugadores ganadores", xlim = c(1,100), ylim = c(1, 1000))
+plot(JuegosN$Torneos, JuegosN$JugadoresGanadores, main = "CANTIDAD DE JUGADORES GANADORES POR TORNEO", sub = "CORRELACIÓN JUGADORES - TORNEOS", xlab = "Torneos", ylab = "Jugadores ganadores", xlim = c(1,100), ylim = c(1, 1000))
 ```
 
 En esta gráfica se busca encontrar una relación entre la fecha de lanzamiento de un juego y el monto total de premios ofrecidos en sus torneos. Tal relación parece no existir, sin embargo, se observa que los juegos que ofrecen premios en sus torneos en su mayoría son de la última decada.
 
 ```{r}
-plot(JuegosN$AñoLanzamiento, JuegosN$Premios, xlab = "Año del juego", ylab = "Premio monetario", xlim = c(1990, 2021), ylim = c(1, 10000))
+plot(JuegosN$AñoLanzamiento, JuegosN$Premios, main = "MONTO TOTAL DE PREMIOS OFRECIDOS EN TORNEOS DESDE EL AÑO DE LANZAMIENTO", sub = "RELACIÓN ENTRE AÑO DE LANZAMIENTO Y PREMIOS" , xlab = "Año del juego", ylab = "Premio monetario", xlim = c(1990, 2021), ylim = c(1, 10000))
 ```
 
 En esta gráfica se observa la cantidad de equipos que han ganado al menos un torneo por cada juego. Se observa múltiples equipos que han participado en 5 diferentes juegos y se infiere que es raro que un equipo se dedique de manera exclusiva a un juego. 
 
 ```{r}
-hist(table(CompetitiveN$Equipo), breaks = 20, xlab = "Equipos", ylab = "Juegos", main = "Histograma de equipos-juegos")
+hist(table(CompetitiveN$Equipo), breaks = 20, main = "CANTIDAD DE EQUIPOS GANADORES DE TORNEOS", sub = "TORNEOS POR CADA JUEGO", xlab = "Equipos", ylab = "Juegos", main = "Histograma de equipos-juegos")
 ```
 
 La siguiente gráfica muestra la cantidad de torneos ganados por un equipo de E-sports en un juego y el monto total obtenido en premios. Se observa que existen juegos que ofrecen un monto total mayor en premios aún si no han realizado muchos torneos. 
 
 ```{r}
 plot(EquiposN$TorneosGanados, EquiposN$MontoGanado,
+     main = "RELACIÓN ENTRE CANTIDAD DE TORNEOS GANADOS Y MONTO TOTAL EN PREMIOS",
+     sub = "EQUIPO DE E-SPORTS GANADOR EN UN JUEGO",
      xlab = "Número de torneos ganados",
      ylab = "Monto de los premios",
      xlim = c(1, 100),
