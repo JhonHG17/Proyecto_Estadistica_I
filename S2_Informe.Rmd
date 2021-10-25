@@ -166,10 +166,10 @@ round(mediaGanadores,0)
 
 Media de jugadores que han ganado un torneo por mes
 ```{r}
-mediaJugadores = round(mean(HistoricoN$NumeroJugadoresGanadores, na.rm = TRUE), 2)
+mediaJugadores = floor(mean(HistoricoN$NumeroJugadoresGanadores, na.rm = TRUE))
 mediaJugadores
 ```
-Juego con más torneos organizados en un rango mayor de tiempo
+Juego con más torneos organizados en un rango mayor de tiempo.
 
 ```{r}
 getmode <- function(v) {
