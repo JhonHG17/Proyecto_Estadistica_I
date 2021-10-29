@@ -24,15 +24,15 @@ library("ggplot2")
 ```
 
 ```{r echo=FALSE, warning=FALSE, ,message=FALSE, results=FALSE}
-Equipos <- read_csv("bases_de_datos/highest_earnings/highest_earning_teams.csv")
-Jugadores <- read_csv("bases_de_datos/highest_earnings/highest_earning_players.csv")
-Paises <- read_csv("bases_de_datos/highest_earnings/country.csv")
-Juegos <- read_csv("bases_de_datos/historical/GeneralEsportData.csv")
-Historico <- read_csv("bases_de_datos/historical/HistoricalEsportData.csv")
+Equipos <- read_csv("bases_de_datos/highest_earnings/highest_earning_teams.csv") #2
+Jugadores <- read_csv("bases_de_datos/highest_earnings/highest_earning_players.csv") #1
+Paises <- read_csv("bases_de_datos/highest_earnings/country.csv") #1 (Respecto codigo de pais)
+Juegos <- read_csv("bases_de_datos/historical/GeneralEsportData.csv") #3 
+Historico <- read_csv("bases_de_datos/historical/HistoricalEsportData.csv") #4
 Competitive <- read_csv("bases_de_datos/historical/competitive_game.csv")
 PaisesIngresos <- read_csv("bases_de_datos/players_teams/country_earnings.csv")
-JugadoresIngresosT<- read_csv("bases_de_datos/players_teams/total_player_earnings.csv")
-EquiposIngresosT <- read_csv("bases_de_datos/players_teams/total_team_earnings.csv")
+JugadoresIngresosT<- read_csv("bases_de_datos/players_teams/total_player_earnings.csv") #1* (Respecto usuario) 
+EquiposIngresosT <- read_csv("bases_de_datos/players_teams/total_team_earnings.csv") #2
 ```
 
 ```{r echo=FALSE, warning=FALSE, ,message=FALSE, results=FALSE}
