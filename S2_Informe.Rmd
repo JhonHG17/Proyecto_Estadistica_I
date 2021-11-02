@@ -24,24 +24,26 @@ library("ggplot2")
 ```
 
 ```{r echo=FALSE, warning=FALSE, ,message=FALSE, results=FALSE}
-Equipos <- read_csv("bases_de_datos/highest_earnings/highest_earning_teams.csv") #2
+rm(list = ls(all = TRUE))
+Equipos <- read_csv("bases_de_datos/highest_earnings/highest_earning_teams.csv") #2*
 Jugadores <- read_csv("bases_de_datos/highest_earnings/highest_earning_players.csv") #1
-Paises <- read_csv("bases_de_datos/highest_earnings/country.csv") #1 (Respecto codigo de pais)
-Juegos <- read_csv("bases_de_datos/historical/GeneralEsportData.csv") #3 
-Historico <- read_csv("bases_de_datos/historical/HistoricalEsportData.csv") #4
-Competitive <- read_csv("bases_de_datos/historical/competitive_game.csv")
+Paises <- read_csv("bases_de_datos/highest_earnings/country.csv") #1
+Juegos <- read_csv("bases_de_datos/historical/GeneralEsportData.csv") #3
+Historico <- read_csv("bases_de_datos/historical/HistoricalEsportData.csv") #3*
+Competitive <- read_csv("bases_de_datos/historical/competitive_game.csv") #
 PaisesIngresos <- read_csv("bases_de_datos/players_teams/country_earnings.csv")
-JugadoresIngresosT<- read_csv("bases_de_datos/players_teams/total_player_earnings.csv") #1* (Respecto usuario) 
+JugadoresIngresosT<- read_csv("bases_de_datos/players_teams/total_player_earnings.csv") #1*
 EquiposIngresosT <- read_csv("bases_de_datos/players_teams/total_team_earnings.csv") #2
 ```
 
+
 ```{r echo=FALSE, warning=FALSE, ,message=FALSE, results=FALSE}
 # Renombrado de atributos 
-Equipos %>% rename(EquipoID = TeamId, Nombre = TeamName, MontoGanado = TotalUSDPrize, Juego = Game, GeneroJuego = Genre, TorneosGanados = TotalTournaments) -> EquiposN
+Equipos %>% rename(EquipoID = TeamId, Equipo = TeamName, IngresosJuego = TotalUSDPrize, Juego = Game, GeneroJuego = Genre, TorneosGanados = TotalTournaments) -> EquiposN
 
-Jugadores %>% rename(JugadorID = PlayerId, Nombre = NameFirst, Apellido = NameLast, Usuario = CurrentHandle, CodigoPais = CountryCode, IngresosTotal = TotalUSDPrize, Juego = Game) -> JugadoresN
+Jugadores %>% rename(JugadorID = PlayerId, Nombre = NameFirst, Apellido = NameLast, Usuario = CurrentHandle, CodigoPais = CountryCode, IngresosJuego = TotalUSDPrize, Juego = Game) -> JugadoresN
 
-Paises %>% rename (Continente = Continent_Name, Continente_codigo = Continent_Code, Pais = Country_Name, Pais_codigo_dos = Two_Letter_Country_Code, Pais_codigo_tres = Three_Letter_Country_Code, Numero_pais = Country_Number) -> PaisesN
+Paises %>% rename (Continente = Continent_Name, Continente_codigo = Continent_Code, Pais = Country_Name, CodigoPais = Two_Letter_Country_Code, Pais_codigo_tres = Three_Letter_Country_Code, Numero_pais = Country_Number) -> PaisesN
 
 Juegos %>% rename(Juego = Game, AñoLanzamiento = ReleaseDate, Premios = TotalEarnings, PremiosOnline = OnlineEarnings, JugadoresGanadores = TotalPlayers, Torneos = TotalTournaments) -> JuegosN
 
@@ -51,54 +53,84 @@ Competitive %>% rename(Juego = Game, MontoGanado = `Total Money Earned`, Porcent
 
 PaisesIngresos %>% rename (Pais = Country, Ingresos_totales = `Total Earning by Player`, Porcentaje_ingresos = `Percentage of Country Total Earning`, Equipo = Team) -> PaisesIngresosN
 
-JugadoresIngresosT %>% rename (Usuario = `Player ID`, Nombres = Name, Ingresos_totales = `Total Earning`, Equipo = Team) -> JugadoresIngresosTN
+JugadoresIngresosT %>% rename (Usuario = `Player ID`, Nombres = Name, IngresosTotales = `Total Earning`, Equipo = Team) -> JugadoresIngresosTN
 
-EquiposIngresosT %>% rename (Equipo = `Team Name`, Ingresos_totales = `Total Prize Won`) -> EquiposIngresosTN
+EquiposIngresosT %>% rename (Equipo = `Team Name`, IngresosTotales = `Total Prize Won`) -> EquiposIngresosTN
 ```
 
 ```{r echo=FALSE, warning=FALSE, ,message=FALSE, results=FALSE}
 # Limpieza de datos
 
-# Equipos
-#summary(EquiposN)
+## Teams
+EquiposIngresosTN$IngresosTotales = as.numeric(gsub("[\\$,]", "",  EquiposIngresosTN$IngresosTotales))
+Teams <- merge(x=EquiposN, y=EquiposIngresosTN, by = "Equipo", all.x = TRUE)
 
-# Jugadores
-#summary(JugadoresN)
+rm(EquiposN,EquiposIngresosTN)
+#summary(Teams)
+#length(unique(Teams$Equipo))
 
-# Países
-#summary(PaisesN)
+## Players
+JugadoresIngresosTN$IngresosTotales = as.numeric(gsub("[\\$,]", "",  JugadoresIngresosTN$IngresosTotales))
+PaisesN <-PaisesN[!duplicated(PaisesN$CodigoPais), ]
+JugadoresN$CodigoPais = toupper(JugadoresN$CodigoPais)
 
-# Juegos
+JugadoresN <- merge(x=JugadoresN, y=PaisesN, by = "CodigoPais", all.x = TRUE)
+JugadoresN$Usuario[duplicated(JugadoresN$Usuario)]
+Players <- merge(x=JugadoresIngresosTN, y=JugadoresN, by = "Usuario", all.x = TRUE)
+
+Players <- Players[mapply(grepl, (Players$Nombre), Players$Nombres) | is.na(Players$Nombre) | is.na(Players$Apellido),]
+Players <- Players %>% distinct(Nombres, IngresosTotales, Equipo, .keep_all = TRUE)
+Players$Nombre <- NULL
+Players$Apellido <- NULL
+Players[10:11] <- list(NULL)
+Players %>% rename(CodigoPaisT = Pais_codigo_tres, NroPais = Numero_pais, ) -> Players
+Players <- Players %>% relocate(CodigoPais, .before = CodigoPaisT)
+Players <- Players %>% relocate(JugadorID, .before = IngresosTotales)
+
+rm(JugadoresN,JugadoresIngresosTN, PaisesN)
+
+## Games
 select(JuegosN, -Genre) -> JuegosN
 JuegosN$Premios[JuegosN$Premios <= 100] <- NA
 JuegosN$PremiosOnline[JuegosN$PremiosOnline <= 100] <- NA
 JuegosN$JugadoresGanadores[JuegosN$JugadoresGanadores == 0] <- NA
 JuegosN$Torneos[JuegosN$Torneos == 0] <- NA
-#summary(JuegosN)
+Games <- JuegosN
+rm(JuegosN)
+#summary(Games)
 
-#Histórico
+## Tournaments
 HistoricoN$Premios[HistoricoN$Premios <= 100] <- NA
 HistoricoN$NumeroJugadoresGanadores[HistoricoN$NumeroJugadoresGanadores == 0] <- NA
-#summary(HistoricoN)
+Tournaments <- HistoricoN
+rm(HistoricoN)
+#summary(Tournaments)
 
-# Competitive
+## Teams_Games
 CompetitiveN$MontoGanado = as.numeric(gsub("[\\$,]", "",  CompetitiveN$MontoGanado))
 CompetitiveN$MontoGanado[CompetitiveN$MontoGanado == 0] <- NA
 CompetitiveN$PorcentajeMontoTotalGanado = as.numeric(gsub("%", "", CompetitiveN$PorcentajeMontoTotalGanado))
-#summary(CompetitiveN)
+Teams_Games <- CompetitiveN
+Teams_Games %>% rename(IngresosJuego = MontoGanado, Porcentaje = PorcentajeMontoTotalGanado) -> Teams_Games
+rm(CompetitiveN)
 
-# Países Ingresos (Decidir si los 5 NA's no deberían tomarse en cuenta)
+#summary(Teams_Games)
+
+## Teams_Country
 PaisesIngresosN$Ingresos_totales = as.numeric(gsub("[\\$,]", "",  PaisesIngresosN$Ingresos_totales))
 PaisesIngresosN$Porcentaje_ingresos = as.numeric(gsub("%", "", PaisesIngresosN$Porcentaje_ingresos))
-#summary(PaisesIngresosN)
+Teams_Country <- PaisesIngresosN
+Teams_Country %>% rename(IngresosPais = Ingresos_totales, Porcentaje = Porcentaje_ingresos) -> Teams_Country
+Teams_Country <- Teams_Country[complete.cases(Teams_Country), ]
+rm(PaisesIngresosN)
+#summary(Teams_Country)
 
-#Jugadores Ingresos Totales
-JugadoresIngresosTN$Ingresos_totales = as.numeric(gsub("[\\$,]", "",  JugadoresIngresosTN$Ingresos_totales))
-#summary(JugadoresIngresosTN)
+```
 
-#Equipos Ingresos Totales
-EquiposIngresosTN$Ingresos_totales = as.numeric(gsub("[\\$,]", "",  EquiposIngresosTN$Ingresos_totales))
-#summary(JugadoresIngresosTN)
+
+```{r}
+# boxplot(Games$Torneos, horizontal = TRUE, col = "aquamarine", main = "Números de Torneos")
+# stripchart(Games$Torneos, method = "jitter", pch = 19, add = TRUE, col = "brown1") abline(v=mean(Games$Torneos), col = "dodgerblue4") 
 ```
 
 # 1. Introducción
