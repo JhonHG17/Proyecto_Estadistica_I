@@ -15,6 +15,7 @@ output:
 -   Munguia Cruzatt, Mauro Sthepano
 -   Ramos Torres, Guido Antonio
 
+
 ```{r echo=FALSE, warning=FALSE, ,message=FALSE, results=FALSE}
 library("readr")
 library("utf8")
@@ -45,9 +46,9 @@ Jugadores %>% rename(JugadorID = PlayerId, Nombre = NameFirst, Apellido = NameLa
 
 Paises %>% rename (Continente = Continent_Name, Continente_codigo = Continent_Code, Pais = Country_Name, CodigoPais = Two_Letter_Country_Code, Pais_codigo_tres = Three_Letter_Country_Code, Numero_pais = Country_Number) -> PaisesN
 
-Juegos %>% rename(Juego = Game, AñoLanzamiento = ReleaseDate, Premios = TotalEarnings, PremiosOnline = OnlineEarnings, JugadoresGanadores = TotalPlayers, Torneos = TotalTournaments) -> JuegosN
+Juegos %>% rename(Juego = Game, AñoLanzamiento = ReleaseDate, Premios = TotalEarnings, PremiosOnline = OnlineEarnings, Ganadores = TotalPlayers, Torneos = TotalTournaments) -> JuegosN
 
-Historico %>% rename(Fecha = Date, Juego = Game, Premios = Earnings, NumeroJugadoresGanadores = Players, Torneos = Tournaments) -> HistoricoN
+Historico %>% rename(Fecha = Date, Juego = Game, Premios = Earnings, Ganadores = Players, Torneos = Tournaments) -> HistoricoN
 
 Competitive %>% rename(Juego = Game, MontoGanado = `Total Money Earned`, PorcentajeMontoTotalGanado = `Total Money Earned Percentage`, Equipo = Team) -> CompetitiveN
 
@@ -93,7 +94,7 @@ rm(JugadoresN,JugadoresIngresosTN, PaisesN)
 select(JuegosN, -Genre) -> JuegosN
 JuegosN$Premios[JuegosN$Premios <= 100] <- NA
 JuegosN$PremiosOnline[JuegosN$PremiosOnline <= 100] <- NA
-JuegosN$JugadoresGanadores[JuegosN$JugadoresGanadores == 0] <- NA
+JuegosN$JugadoresGanadores[JuegosN$Ganadores == 0] <- NA
 JuegosN$Torneos[JuegosN$Torneos == 0] <- NA
 Games <- JuegosN
 rm(JuegosN)
@@ -101,7 +102,7 @@ rm(JuegosN)
 
 ## Tournaments
 HistoricoN$Premios[HistoricoN$Premios <= 100] <- NA
-HistoricoN$NumeroJugadoresGanadores[HistoricoN$NumeroJugadoresGanadores == 0] <- NA
+HistoricoN$NumeroJugadoresGanadores[HistoricoN$Ganadores == 0] <- NA
 Tournaments <- HistoricoN
 rm(HistoricoN)
 #summary(Tournaments)
@@ -127,11 +128,6 @@ rm(PaisesIngresosN)
 
 ```
 
-
-```{r}
-# boxplot(Games$Torneos, horizontal = TRUE, col = "aquamarine", main = "Números de Torneos")
-# stripchart(Games$Torneos, method = "jitter", pch = 19, add = TRUE, col = "brown1") abline(v=mean(Games$Torneos), col = "dodgerblue4") 
-```
 
 # 1. Introducción
 
@@ -208,29 +204,29 @@ Adicionalmente, se han traducido y renombrado las variables de cada dataset al e
 ## 2.2 Descriptores numéricos
 
 ```{r}
-summary(Juegos)
+summary(Games)
 ```
 
 Media de premios totales ofrecidos por juego
 
 ```{r}
 
-mediaTotalEarnings = mean(Juegos$TotalEarnings)
+Premios = mean(Games$Premios)
 
-round(mediaTotalEarnings,2)
+round(Premios,2)
 
 ```
 
 Media de premios totales ofrecidos en un torneo en línea por juego
 
 ```{r}
-mediaPremiosOnline = round(mean(JuegosN$PremiosOnline, na.rm=TRUE), 2)
+PremiosOnline = round(mean(Games$PremiosOnline, na.rm=TRUE), 2)
 ```
 
 Media de jugadores que han ganado al menos un torneo por juego
 
 ```{r}
-mediaGanadores = mean(JuegosN$JugadoresGanadores, na.rm = TRUE)
+mediaGanadores = mean(Games$JugadoresGanadores, na.rm = TRUE)
 
 round(mediaGanadores,0)
 
@@ -239,7 +235,7 @@ round(mediaGanadores,0)
 Media de jugadores que han ganado un torneo por mes
 
 ```{r}
-mediaJugadores = floor(mean(HistoricoN$NumeroJugadoresGanadores, na.rm = TRUE))
+mediaJugadores = floor(mean(Tournaments$NumeroJugadoresGanadores, na.rm = TRUE))
 mediaJugadores
 ```
 
