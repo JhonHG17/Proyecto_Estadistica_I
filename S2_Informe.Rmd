@@ -74,17 +74,14 @@ rm(EquiposN,EquiposIngresosTN)
 JugadoresIngresosTN$IngresosTotales = as.numeric(gsub("[\\$,]", "",  JugadoresIngresosTN$IngresosTotales))
 PaisesN <-PaisesN[!duplicated(PaisesN$CodigoPais), ]
 JugadoresN$CodigoPais = toupper(JugadoresN$CodigoPais)
-
 JugadoresN <- merge(x=JugadoresN, y=PaisesN, by = "CodigoPais", all.x = TRUE)
-JugadoresN$Usuario[duplicated(JugadoresN$Usuario)]
 Players <- merge(x=JugadoresIngresosTN, y=JugadoresN, by = "Usuario", all.x = TRUE)
-
 Players <- Players[mapply(grepl, (Players$Nombre), Players$Nombres) | is.na(Players$Nombre) | is.na(Players$Apellido),]
 Players <- Players %>% distinct(Nombres, IngresosTotales, Equipo, .keep_all = TRUE)
 Players$Nombre <- NULL
 Players$Apellido <- NULL
 Players[10:11] <- list(NULL)
-Players %>% rename(CodigoPaisT = Pais_codigo_tres, NroPais = Numero_pais, ) -> Players
+Players %>% rename(Genero = Genre, CodigoPaisT = Pais_codigo_tres, NroPais = Numero_pais, ) -> Players
 Players <- Players %>% relocate(CodigoPais, .before = CodigoPaisT)
 Players <- Players %>% relocate(JugadorID, .before = IngresosTotales)
 
@@ -97,6 +94,7 @@ JuegosN$PremiosOnline[JuegosN$PremiosOnline <= 100] <- NA
 JuegosN$JugadoresGanadores[JuegosN$Ganadores == 0] <- NA
 JuegosN$Torneos[JuegosN$Torneos == 0] <- NA
 Games <- JuegosN
+Games$JugadoresGanadores <- NULL
 rm(JuegosN)
 #summary(Games)
 
@@ -104,6 +102,7 @@ rm(JuegosN)
 HistoricoN$Premios[HistoricoN$Premios <= 100] <- NA
 HistoricoN$NumeroJugadoresGanadores[HistoricoN$Ganadores == 0] <- NA
 Tournaments <- HistoricoN
+Tournaments$NumeroJugadoresGanadores <- NULL
 rm(HistoricoN)
 #summary(Tournaments)
 
@@ -125,6 +124,9 @@ Teams_Country %>% rename(IngresosPais = Ingresos_totales, Porcentaje = Porcentaj
 Teams_Country <- Teams_Country[complete.cases(Teams_Country), ]
 rm(PaisesIngresosN)
 #summary(Teams_Country)
+
+#Borrar tablas originales
+rm(Competitive,Equipos, EquiposIngresosT, Historico, Juegos, Jugadores, JugadoresIngresosT, Paises, PaisesIngresos)
 
 ```
 
@@ -169,37 +171,87 @@ Adicionalmente, se han traducido y renombrado las variables de cada dataset al e
 
 # 2. Presentación de datasets, variables y parámetros de estudio
 
-## 2.1 Datasets
+## 2.1. Datasets
 
-### 2.1.1 aaa
+### 2.1.1. Juegos
 
-+-------------------------------------------------------------------------------+-------------------------------+------------------+----------------------------------------------------+
-| Pregunta                                                                      | Variable                      | Tipo de variable | Restricciones                                      |
-+===============================================================================+===============================+==================+====================================================+
-| ¿Cuál es el nombre del juego?                                                 | Juego                         | Nominal          | Juegos que al menos hayan tenido un torneo         |
-+-------------------------------------------------------------------------------+-------------------------------+------------------+----------------------------------------------------+
-| ¿Cuál es el monto de premios total en todos sus torneos?                      | Premios                       | Continua         | Real mayor a cero                                  |
-+-------------------------------------------------------------------------------+-------------------------------+------------------+----------------------------------------------------+
-| ¿Cuál es el monto de premios total en torneos en línea?                       | Premios Online                | Continua         | Real mayor a cero                                  |
-+-------------------------------------------------------------------------------+-------------------------------+------------------+----------------------------------------------------+
-| Por cada juego, ¿cuántos jugadores han ganado torneos?                        | Número de jugadores ganadores | Discreta         | Entero mayor a cero                                |
-+-------------------------------------------------------------------------------+-------------------------------+------------------+----------------------------------------------------+
-| Por cada juego, ¿cuánto ha ganado cada equipo de E-sport?                     | Monto ganado por equipos      | Continua         | Real mayor a cero                                  |
-+-------------------------------------------------------------------------------+-------------------------------+------------------+----------------------------------------------------+
-| Por cada juego, ¿cuánto dinero total se ha premiado?                          | Ganancias totales             | Continua         | Real mayor a cero                                  |
-+-------------------------------------------------------------------------------+-------------------------------+------------------+----------------------------------------------------+
-| Por cada juego, ¿cuántos torneos se realizaron en un período?                 | Número de torneos             | Discreta         | Real mayor a cero                                  |
-+-------------------------------------------------------------------------------+-------------------------------+------------------+----------------------------------------------------+
-| Por cada juego, ¿en qué mes y año se realizaron sus torneos?                  | Fecha de cada torneo          | Ordinal          | Años entre 2019 a 2020                             |
-+-------------------------------------------------------------------------------+-------------------------------+------------------+----------------------------------------------------+
-| ¿Cuál es el año de lanzamiento del juego?                                     | Año de lanzamiento            | Ordinal          | Después de 1980                                    |
-+-------------------------------------------------------------------------------+-------------------------------+------------------+----------------------------------------------------+
-| Por cada jugador, ¿cuánto ha generado por juego?                              | Ganancias por jugadores       | Continua         | Real mayor a cero                                  |
-+-------------------------------------------------------------------------------+-------------------------------+------------------+----------------------------------------------------+
-| Por cada equipo, ¿cuánto ha generado por todos los juegos que ha participado? | Ganancias por equipo          | Continua         | Real mayor a cero                                  |
-+-------------------------------------------------------------------------------+-------------------------------+------------------+----------------------------------------------------+
-| ¿Cuál es el nombre de usuario del jugador?                                    | Usuario                       | Nominal          | Jugador que haya participado en al menos un torneo |
-+-------------------------------------------------------------------------------+-------------------------------+------------------+----------------------------------------------------+
+| Variable | Tipo | Restricciones | Descripción|
+| :--- | :--- | :--- | :--- |
+| Juego           | Categórica nominal | Ninguna     | El nombre del videojuego              |
+| Año Lanzamiento | Categórica ordinal | Desde 1980  | El año del lanzamiento del videojuego |
+| Premios         | Numérica continua  | Mayor o igual a 0 | El monto total de premios ofrecidos en todos los torneos del videojuego | 
+| PremiosOnline   | Numérica continua  | Mayor o igual a 0 | El monto total de premios ofrecidos en todos los torneos en línea del videojuego | 
+| Ganadores       | Numérica discreta | Mayor o igual a 0  | Número de ganadores en todos los torneos del videjuego | 
+| Torneos         | Numérica discreta | Mayor o igual a 0 | Número total de torneos del videjuego |
+
+###### **Observaciones**
+- En la variable ganadores se debe tomar en cuenta que un jugador puede ganar varios torneos.
+
+
+### 2.1.2. Torneos
+
+| Variable | Tipo | Restricciones | Descripción|
+| :--- | :--- | :--- | :--- |
+| Fecha  | Categórica ordinal | Desde 1998  | Año y mes en que se realizó un torneo |
+| Juego  | Categórica nominal | Ninguna     | El nombre del videojuego para el cual se realizaron torneos en esa fecha |
+| Premios         | Numérica continua  | Mayor o igual a 0 | El monto total de premios ofrecidos en esa fecha | 
+| Ganadores  | Numérica discreta | Mayor o igual a 0  | Número de ganadores que hubo en el torneo | 
+| Torneos    | Numérica discreta | Mayor o igual a 0 | Número de torneos en esa fecha |
+
+###### **Observaciones**
+- En la variable ganadores se debe tomar en cuenta que un jugador puede ganar varios torneos y por lo tanto puede haber más ganadores que torneos en una unidad muestral.
+
+### 2.1.3. Jugadores
+
+| Variable | Tipo | Restricciones | Descripción|
+| :--- | :--- | :--- | :--- |
+| Usuario  | Categórica nominal | Ninguna  | Nombre del usuario del jugador |
+| Nombres  | Categórica nominal | Ninguna | Nombre y apellido del jugador |
+| JugadorID | Categórica nominal  | Mayor o igual a 0 | Número identificador del jugador | 
+| IngresosTotales  | Numérica continua  | Mayor o igual a 0  | Ingresos totales obtenidos en torneos | 
+| Equipo    | Categórica nominal | Ninguna | Nombre del equipo en el que juega |
+| IngresosJuego    | Numérica continua  |Mayor o igual a 0 | Ingresos totales obtenidos en torneos de un juego |
+| Juego    | Categórica nominal | Ninguna | Nombre del juego |
+| Genero    | Categórica nominal | Ninguna | Genero del juego |
+| Pais    | Categórica nominal | Ninguna| País de procedencia |
+| CodigoPais    | Categórica nominal |Ninguna | Código de país |
+| CodigoPaisT    | Categórica nominal | Ninguna | Código de país de tres caracteres |
+| NroPais    | Categórica nominal | Mayor o igual a 0 | Número identificador de país |
+
+
+
+### 2.1.4. Equipos
+
+| Variable | Tipo | Restricciones | Descripción|
+| :--- | :--- | :--- | :--- |
+| Equipo  | Categórica nominal | Ninguna  | Nombre del equipo |
+| EquipoID  | Categórica nominal | Mayor o igual a 0 | Número identificador del equipo |
+| IngresosJuego | Numérica continua  | Mayor o igual a 0 | El total de ingresos obtenidos en torneos de un videojuego | 
+| TorneosGanados  | Numérica discreta | Mayor o igual a 0  | Numero de torneos ganados en un juego | 
+| Juego    | Categórica nominal | Ninguna | Nombre del juego de los torneos en el que se participa |
+| GeneroJuego    | Categórica nominal | Ninguna | Género del juego |
+| IngresosTotales    | Numérica continua | Mayor o igual a 0 | Ingresos totales obtenidos por el equipo |
+
+
+### 2.1.5. Equipos-Pais
+
+| Variable | Tipo | Restricciones | Descripción|
+| :--- | :--- | :--- | :--- |
+| Pais  | Categórica nominal | Ninguna | Nombre del país |
+| IngresosPais  | Numérica continua | Mayor o igual a 0 | Ingresos obtenidos en torneos en un país |
+| Porcentaje | Numérica continua  | Mayor o igual a 0 | El porcentaje de todos los ingresos obtenidos por un equipo  | 
+| Equipo  | Numérica discreta | Mayor o igual a 0  | Nombre del equipo |
+
+### 2.1.6. Equipos-Juego
+
+| Variable | Tipo | Restricciones | Descripción|
+| :--- | :--- | :--- | :--- |
+| Juego  | Categórica nominal | Ninguna | Nombre del juego |
+| IngresosJuegos| Numérica continua | Mayor o igual a 0 | Ingresos obtenidos en torneos de un juego |
+| Porcentaje | Numérica continua  | Mayor o igual a 0 | El porcentaje de todos los ingresos obtenidos por un equipo  | 
+| Equipo  | Numérica discreta | Mayor o igual a 0  | Nombre del equipo |
+
+
 
 ## 2.2 Descriptores numéricos
 
@@ -226,7 +278,7 @@ PremiosOnline = round(mean(Games$PremiosOnline, na.rm=TRUE), 2)
 Media de jugadores que han ganado al menos un torneo por juego
 
 ```{r}
-mediaGanadores = mean(Games$JugadoresGanadores, na.rm = TRUE)
+mediaGanadores = mean(Games$Ganadores, na.rm = TRUE)
 
 round(mediaGanadores,0)
 
@@ -235,7 +287,7 @@ round(mediaGanadores,0)
 Media de jugadores que han ganado un torneo por mes
 
 ```{r}
-mediaJugadores = floor(mean(Tournaments$NumeroJugadoresGanadores, na.rm = TRUE))
+mediaJugadores = floor(mean(Tournaments$Ganadores, na.rm = TRUE))
 mediaJugadores
 ```
 
@@ -246,7 +298,7 @@ getmode <- function(v) {
    uniqv <- unique(v)
    uniqv[which.max(tabulate(match(v, uniqv)))]
 }
-modaJuego = getmode(HistoricoN$Juego)
+modaJuego = getmode(Tournaments$Juego)
 modaJuego
 ```
 
@@ -257,25 +309,25 @@ La moda es de interés porque indica el juego con mayor tiempo realizando torneo
 La siguiente gráfica describe si existe una correlación entre el número de torneos realizados por un juego y la cantidad de jugadores que han ganado al menos un torneo. Es interesante observar cómo existen juegos con más de 100 torneos diferentes en los cuales existen entre 200 a 600 jugadores ganadores.
 
 ```{r}
-plot(JuegosN$Torneos, JuegosN$JugadoresGanadores, main = "CANTIDAD DE JUGADORES GANADORES POR TORNEO", sub = "CORRELACIÓN JUGADORES - TORNEOS", xlab = "Torneos", ylab = "Jugadores ganadores", xlim = c(1,100), ylim = c(1, 1000))
+plot(Games$Torneos, Games$Ganadores, main = "CANTIDAD DE JUGADORES GANADORES POR TORNEO", sub = "CORRELACIÓN JUGADORES - TORNEOS", xlab = "Torneos", ylab = "Jugadores ganadores", xlim = c(1,100), ylim = c(1, 1000))
 ```
 
 En esta gráfica se busca encontrar una relación entre la fecha de lanzamiento de un juego y el monto total de premios ofrecidos en sus torneos. Tal relación parece no existir, sin embargo, se observa que los juegos que ofrecen premios en sus torneos en su mayoría son de la última decada.
 
 ```{r}
-plot(JuegosN$AñoLanzamiento, JuegosN$Premios, main = "MONTO TOTAL DE PREMIOS OFRECIDOS EN TORNEOS DESDE EL AÑO DE LANZAMIENTO", sub = "RELACIÓN ENTRE AÑO DE LANZAMIENTO Y PREMIOS" , xlab = "Año del juego", ylab = "Premio monetario", xlim = c(1990, 2021), ylim = c(1, 10000))
+plot(Games$AñoLanzamiento, Games$Premios, main = "MONTO TOTAL DE PREMIOS OFRECIDOS EN TORNEOS DESDE EL AÑO DE LANZAMIENTO", sub = "RELACIÓN ENTRE AÑO DE LANZAMIENTO Y PREMIOS" , xlab = "Año del juego", ylab = "Premio monetario", xlim = c(1990, 2021), ylim = c(1, 10000))
 ```
 
 En esta gráfica se observa la cantidad de equipos que han ganado al menos un torneo por cada juego. Se observa múltiples equipos que han participado en 5 diferentes juegos y se infiere que es raro que un equipo se dedique de manera exclusiva a un juego.
 
 ```{r}
-hist(table(CompetitiveN$Equipo), breaks = 20, main = "CANTIDAD DE EQUIPOS GANADORES DE TORNEOS", sub = "TORNEOS POR CADA JUEGO", xlab = "Equipos", ylab = "Juegos")
+hist(table(Teams_Games$Equipo), breaks = 20, main = "CANTIDAD DE EQUIPOS GANADORES DE TORNEOS", sub = "TORNEOS POR CADA JUEGO", xlab = "Equipos", ylab = "Juegos")
 ```
 
 La siguiente gráfica muestra la cantidad de torneos ganados por un equipo de E-sports en un juego y el monto total obtenido en premios. Se observa que existen juegos que ofrecen un monto total mayor en premios aún si no han realizado muchos torneos.
 
 ```{r}
-plot(EquiposN$TorneosGanados, EquiposN$MontoGanado,
+plot(Teams$TorneosGanados, Teams$IngresosTotales,
      main = "RELACIÓN ENTRE CANTIDAD DE TORNEOS GANADOS Y MONTO TOTAL EN PREMIOS",
      sub = "EQUIPO DE E-SPORTS GANADOR EN UN JUEGO",
      xlab = "Número de torneos ganados",
