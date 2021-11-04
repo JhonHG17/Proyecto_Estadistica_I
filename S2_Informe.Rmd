@@ -133,13 +133,13 @@ rm(Competitive,Equipos, EquiposIngresosT, Historico, Juegos, Jugadores, Jugadore
 
 # 1. Introducción
 
-El tema que trata nuestra investigación es sobre la variación económica de los equipos y jugadores de E-sports en los Estados unidos entre los años 2019 y 2020. Para realizar un estudio más completo también se consideran los torneos internacionales en los que participaron jugadores y equipos estadounidenses.
+El tema que trata nuestra investigación es sobre la variación económica de los equipos y jugadores de E-sports en los Estados unidos entre los años últimos 20 años. Para realizar un estudio más completo también se consideran los torneos internacionales en los que participaron jugadores y equipos estadounidenses.
 
 ## 1.1 Importancia
 
-La investigación es de importancia para los equipos de E-sport peruanos en proceso de crecimiento, por ejemplo: las casas de juegos o "Gaming Houses'", torneos locales, torneos entre universidades. Estos torneos son de consumo recurrente en jóvenes adolescentes y muy competitivos. Es así que la alta demanda de equipos muestra tendencias favorables de inversión que podrían ser de valor para pequeños empresarios que están interesados en el mercado E-sport.
+La investigación es de importancia para los equipos de E-sport peruanos en proceso de crecimiento, por ejemplo: las casas de juegos o “Gaming Houses’”, torneos locales, torneos entre universidades. Estos torneos son de consumo recurrente en jóvenes adolescentes y muy competitivos. Es así que la alta demanda de equipos muestra tendencias favorables de inversión que podrían ser de valor para pequeños empresarios que están interesados en el mercado E-sport.
 
-Mostrar el crecimiento económico de las E-sports en otros países podría disponer de un mayor panorama para las empresas nacionales interesadas en desarrollar este tipo de torneos en el país.
+El presente trabajo muestra el crecimiento económico de los E-sports en los Estados Unidos y como se han desarrollado los diferentes torneos. A diferencia de otros estudios que se encargan de ver el mercado, este estudio nos permitirá ver como se han desarrollado económicamente los Juegos de E-sports tanto presenciales y online. Además, de permitir ver desarrollo económico para los jugadores, que permiten practicar este deporte y tener una carrera, que te permite solventarte, viendo como han generado dinero en diferentes torneos de juegos y con diferentes equipos. También se observa que es un mercado poco conocido en el Perú y haciendo conocer a las empresas el panorama completo para desarrollar torneos en el país para que el mercado crezca y sea un medio para mover la economía del país, ya que es un mercado formal.
 
 ## 1.2 Objetivos del estudio
 
