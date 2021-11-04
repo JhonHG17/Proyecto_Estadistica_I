@@ -338,18 +338,29 @@ plot(Teams$TorneosGanados, Teams$IngresosTotales,
 
 #Variables Numéricas de Dispersión 
 
+En la presente gráfica se observa la relación entre la cantidad de torneos realizados respecto a la la fecha de lanzamiento de los juegos. Por un lado, el aumento en la cantidad de torneos realizados es notable desde el 2010, mientras que por otro lado, se evidencia leve descenso a  partir del 2020. Una hipótesis para este descenso en la cantidad de torneos es la llegada de la pandemia de Covid-19 que azotó a todo el mundo en esa fecha.
+
 ```{r echo=FALSE}
 plot(Tournaments$Fecha, Tournaments$Torneos, pch = 19, col = "violet", xlab="Fecha de Lanzamiento", ylab="Cantidad de Torneos", main="Fecha de Lanzamiento ~ Torneos")
 ```
+
+
+En la presente gráfica se observa la relación entre el Monto de Premios de los torneos, en dólares, respecto a la la fecha de lanzamiento de los juegos. A A partir del 2011 se evidencia un aumento en los montos de los premios de los torneos.
 
 ```{r echo=FALSE}
 plot(Tournaments$Fecha, Tournaments$Premios, pch = 19, col = "red", xlab="Fecha de Lanzamiento", ylab="Premios (dólares)", main="Fecha de Lanzamiento ~ Premios")
 ```
 
+
+En esta gráfica se busca encontrar una relación entre la fecha de lanzamiento de un juego (1990-2021) y la cantidad de torneos. A partir del 2010, la cantidad de torneos respecto al lanzamiento de los juegos ha aumentado levemente.
+
 ```{r echo=FALSE}
 plot(Games$AñoLanzamiento, Games$Torneos, pch = 19, col = "darkred", xlab="Fecha de Lanzamiento", ylab="Cantidad de Torneos", main="Fecha de Lanzamiento ~ Torneos")
 ```
+
 #Correlación TOURNAMENTS 
+
+En la gráfica podemos observar como las variables numéricas de cantidad de torneos y cantidad de ganadores están correlacionadas, dado que un aumento en la cantidad de torneos que se realicen, significa que de igual manera la cantidad de ganadores tendrá una tendencia a aumentar. Además, al calcular la Correlación de Pearson, podemos denotarla como una **correlación alta**. Sin embargo, algunos datos atípicos pueden influenciar en el cálculo de la correlación. 
 
 ```{r echo=FALSE}
 plot(Tournaments$Torneos, Tournaments$Ganadores, pch = 19, col = "skyblue", xlab="Cantidad de Torneos", ylab="Cantidad de Ganadores", main="Torneos ~ Ganadores")
@@ -360,6 +371,9 @@ abline(lm(Tournaments$Ganadores ~ Tournaments$Torneos), col = "gray0", lwd = 3)
 text(paste("Correlación:", round(cor(Tournaments$Torneos, Tournaments$Ganadores), 2)), x = 90, y = 150)
 ```
 
+
+En la gráfica podemos observar como las variables numéricas de cantidad de ganadores y el monto de los premios están correlacionadas, dado que un aumento en la cantidad de ganadores en los torneos que se realicen, implica que también los montos de los premios tendrán una tendencia a aumentar. Además, al calcular la Correlación de Pearson, podemos denotarla como una **correlación alta**. Sin embargo, algunos datos atípicos pueden influenciar en el cálculo de la correlación.
+
 ```{r echo=FALSE}
 plot(Games$Ganadores, Games$Premios , pch = 19, col = "lightgreen", xlab="Cantidad de Ganadores", ylab="Monto de Premios (Dólares)", main="Ganadores ~ Premios")
 # Línea de regresión
@@ -368,6 +382,9 @@ abline(lm(Games$Premios ~ Games$Ganadores), col = "gray0", lwd = 3)
 # Correlación de Pearson
 text(paste("Correlación:", round(cor(Games$Ganadores, Games$Premios , use = "complete.obs"), 2)), x = 90, y = 150)
 ```
+
+
+En la gráfica podemos observar como las variables numéricas del monto de los premios y monto de los premios online correlacionadas, dado que un aumento en el monto de los premios en los torneos que se realicen, implica que también los montos de los premios online tendrán una tendencia a aumentar. Además, al calcular la Correlación de Pearson, podemos denotarla como una **correlación muy alta**. Sin embargo, algunos datos atípicos pueden influenciar en el cálculo de la correlación.
 
 ```{r echo=FALSE}
 plot(Games$Premios, Games$PremiosOnline , pch = 19, col = "lightpink", xlab="Monto de Premios (Dólares)", ylab="Monto de Premios Online (Dólares)", main="Premios ~ Premios Online")
@@ -378,6 +395,9 @@ abline(lm(Games$PremiosOnline ~ Games$Premios), col = "gray0", lwd = 3)
 text(paste("Correlación:", round(cor(Games$Premios, Games$PremiosOnline, use = "complete.obs"), 2)), x = 90, y = 150)
 ```
 
+
+En la gráfica podemos observar como las variables numéricas de cantidad de torneos y el monto de los premios están correlacionadas, dado que un aumento en la cantidad de torneos que se realicen, implica que también el monto de los premios de los torneos tendrá una tendencia a aumentar. Además, al calcular la Correlación de Pearson, podemos denotarla como una **correlación moderada**. Sin embargo, algunos datos atípicos pueden influenciar en el cálculo de la correlación. 
+
 ```{r echo=FALSE}
 plot(Games$Torneos, Games$Premios , pch = 19, col = "violet", xlab="Cantidad de Torneos", ylab="Monto de Premios (Dólares)", main="Torneos ~ Premios")
 # Línea de regresión
@@ -387,6 +407,9 @@ abline(lm(Games$Premios ~ Games$Torneos), col = "gray0", lwd = 3)
 text(paste("Correlación:", round(cor(Games$Torneos, Games$Premios , use = "complete.obs"), 2)), x = 90, y = 150)
 ```
 
+
+En la gráfica podemos observar como las variables numéricas de cantidad de torneos y el monto de los premios online están correlacionadas, dado que un aumento en la cantidad de torneos que se realicen, implica que también el monto de los premios online de los torneos tendrá una tendencia a aumentar. Además, al calcular la Correlación de Pearson, podemos denotarla como una **correlación moderada**. Sin embargo, algunos datos atípicos pueden influenciar en el cálculo de la correlación.
+
 ```{r echo=FALSE}
 plot(Games$Torneos, Games$PremiosOnline , pch = 19, col = "red", xlab="Cantidad de Torneos", ylab="Monto de Premios Online (Dólares)", main="Torneos ~ Premios Online")
 # Línea de regresión
@@ -395,6 +418,7 @@ abline(lm(Games$PremiosOnline ~ Games$Torneos), col = "gray0", lwd = 3)
 # Correlación de Pearson
 text(paste("Correlación:", round(cor(Games$Torneos, Games$PremiosOnline , use = "complete.obs"), 2)), x = 90, y = 150)
 ```
+
 
 #BOXPLOT
 
@@ -408,9 +432,12 @@ points(round(mean(Tournaments$Ganadores, na.rm = 1)), 1, pch = 19, col = "red", 
 legend("topright", pch = c(21, 19), col = c("red"),
        bg = "white", legend = c("Media"), cex = 1.1)
 ```
+La gráfica boxplot que representa la cantidad de ganadores nos evidencia la media o el promedio de estos. 
+
 ```{r}
 round(mean(Tournaments$Ganadores, na.rm = 1))
 ```
+
 
 ```{r echo=FALSE}
 
@@ -422,9 +449,12 @@ points(mean(Tournaments$Torneos, na.rm = 1), 1, pch = 19, col = "red", cex = 1.1
 legend("topright", pch = c(21, 19), col = c("red"),
        bg = "white", legend = c("Media"), cex = 1.1)
 ```
+La gráfica boxplot que representa la cantidad de torneos nos evidencia la media o el promedio de estos.
+
 ```{r}
 round(mean(Tournaments$Torneos, na.rm = 1))
 ```
+
 
 ```{r echo=FALSE}
 
@@ -436,9 +466,12 @@ points(mean(Tournaments$Premios, na.rm = 1), 1, pch = 19, col = "red", cex = 1.1
 legend("topright", pch = c(21, 19), col = c("red"),
        bg = "white", legend = c("Media"), cex = 1.1)
 ```
+La gráfica boxplot que representa el monto de los premios nos evidencia la media o el promedio de estos.
+
 ```{r}
 round(mean(Tournaments$Premios, na.rm = 1),1)
 ```
+
 ### Variables Aleatorias
 
 #### Funcion binomial
