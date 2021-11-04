@@ -315,13 +315,13 @@ plot(Games$Torneos, Games$Ganadores, main = "CANTIDAD DE JUGADORES GANADORES POR
 En esta gráfica se busca encontrar una relación entre la fecha de lanzamiento de un juego y el monto total de premios ofrecidos en sus torneos. Tal relación parece no existir, sin embargo, se observa que los juegos que ofrecen premios en sus torneos en su mayoría son de la última decada.
 
 ```{r}
-plot(Games$AñoLanzamiento, Games$Premios, main = "MONTO TOTAL DE PREMIOS OFRECIDOS EN TORNEOS DESDE EL AÑO DE LANZAMIENTO", sub = "RELACIÓN ENTRE AÑO DE LANZAMIENTO Y PREMIOS" , xlab = "Año del juego", ylab = "Premio monetario", xlim = c(1990, 2021), ylim = c(1, 10000))
+plot(Games$AñoLanzamiento, Games$Premios, main = "Fecha de Lanzamiento ~ Torneos" ,col = "purple", xlab = "Fecha de lanzamiento", ylab = "Premio (Dólares) ", xlim = c(1990, 2021), ylim = c(1, 10000000))
 ```
 
 En esta gráfica se observa la cantidad de equipos que han ganado al menos un torneo por cada juego. Se observa múltiples equipos que han participado en 5 diferentes juegos y se infiere que es raro que un equipo se dedique de manera exclusiva a un juego.
 
 ```{r}
-hist(table(Teams_Games$Equipo), breaks = 20, main = "CANTIDAD DE EQUIPOS GANADORES DE TORNEOS", sub = "TORNEOS POR CADA JUEGO", xlab = "Equipos", ylab = "Juegos")
+hist(table(Teams_Games$Equipo), breaks = 20, main = "CANTIDAD DE EQUIPOS GANADORES DE TORNEOS", sub = "TORNEOS POR CADA JUEGO", col = "lightgreen", xlab = "Equipos", ylab = "Juegos Ganados", xlim = c(0,50), ylim = c(0,15))
 ```
 
 La siguiente gráfica muestra la cantidad de torneos ganados por un equipo de E-sports en un juego y el monto total obtenido en premios. Se observa que existen juegos que ofrecen un monto total mayor en premios aún si no han realizado muchos torneos.
@@ -335,3 +335,109 @@ plot(Teams$TorneosGanados, Teams$IngresosTotales,
      xlim = c(1, 100),
      ylim = c(1, 1000000))
 ```
+
+#Variables Numéricas de Dispersión 
+
+```{r echo=FALSE}
+plot(Tournaments$Fecha, Tournaments$Torneos, pch = 19, col = "violet", xlab="Fecha de Lanzamiento", ylab="Cantidad de Torneos", main="Fecha de Lanzamiento ~ Torneos")
+```
+
+```{r echo=FALSE}
+plot(Tournaments$Fecha, Tournaments$Premios, pch = 19, col = "red", xlab="Fecha de Lanzamiento", ylab="Premios (dólares)", main="Fecha de Lanzamiento ~ Premios")
+```
+
+```{r echo=FALSE}
+plot(Games$AñoLanzamiento, Games$Torneos, pch = 19, col = "darkred", xlab="Fecha de Lanzamiento", ylab="Cantidad de Torneos", main="Fecha de Lanzamiento ~ Torneos")
+```
+#Correlación TOURSNAMENTS 
+
+```{r echo=FALSE}
+plot(Tournaments$Torneos, Tournaments$Ganadores, pch = 19, col = "skyblue", xlab="Cantidad de Torneos", ylab="Cantidad de Ganadores", main="Torneos ~ Ganadores")
+# Línea de regresión
+abline(lm(Tournaments$Ganadores ~ Tournaments$Torneos), col = "gray0", lwd = 3)
+
+# Correlación de Pearson
+text(paste("Correlación:", round(cor(Tournaments$Torneos, Tournaments$Ganadores), 2)), x = 90, y = 150)
+```
+
+```{r echo=FALSE}
+plot(Games$Ganadores, Games$Premios , pch = 19, col = "lightgreen", xlab="Cantidad de Ganadores", ylab="Monto de Premios (Dólares)", main="Ganadores ~ Premios")
+# Línea de regresión
+abline(lm(Games$Premios ~ Games$Ganadores), col = "gray0", lwd = 3)
+
+# Correlación de Pearson
+text(paste("Correlación:", round(cor(Games$Ganadores, Games$Premios , use = "complete.obs"), 2)), x = 90, y = 150)
+```
+
+```{r echo=FALSE}
+plot(Games$Premios, Games$PremiosOnline , pch = 19, col = "lightpink", xlab="Monto de Premios (Dólares)", ylab="Monto de Premios Online (Dólares)", main="Premios ~ Premios Online")
+# Línea de regresión
+abline(lm(Games$PremiosOnline ~ Games$Premios), col = "gray0", lwd = 3)
+
+# Correlación de Pearson
+text(paste("Correlación:", round(cor(Games$Premios, Games$PremiosOnline, use = "complete.obs"), 2)), x = 90, y = 150)
+```
+
+```{r echo=FALSE}
+plot(Games$Torneos, Games$Premios , pch = 19, col = "violet", xlab="Cantidad de Torneos", ylab="Monto de Premios (Dólares)", main="Torneos ~ Premios")
+# Línea de regresión
+abline(lm(Games$Premios ~ Games$Torneos), col = "gray0", lwd = 3)
+
+# Correlación de Pearson
+text(paste("Correlación:", round(cor(Games$Torneos, Games$Premios , use = "complete.obs"), 2)), x = 90, y = 150)
+```
+
+```{r echo=FALSE}
+plot(Games$Torneos, Games$PremiosOnline , pch = 19, col = "red", xlab="Cantidad de Torneos", ylab="Monto de Premios Online (Dólares)", main="Torneos ~ Premios Online")
+# Línea de regresión
+abline(lm(Games$PremiosOnline ~ Games$Torneos), col = "gray0", lwd = 3)
+
+# Correlación de Pearson
+text(paste("Correlación:", round(cor(Games$Torneos, Games$PremiosOnline , use = "complete.obs"), 2)), x = 90, y = 150)
+```
+
+#BOXPLOT
+
+```{r echo=FALSE}
+
+boxplot(Tournaments$Ganadores, col = "darkgreen",
+        main = "Ganadores", horizontal=TRUE, xlab="Cantidad de Ganadores", notch=TRUE)
+
+points(round(mean(Tournaments$Ganadores, na.rm = 1)), 1, pch = 19, col = "red", cex = 1.1)
+
+legend("topright", pch = c(21, 19), col = c("red"),
+       bg = "white", legend = c("Media"), cex = 1.1)
+```
+```{r}
+round(mean(Tournaments$Ganadores, na.rm = 1))
+```
+
+```{r echo=FALSE}
+
+boxplot(Tournaments$Torneos, col = "steelblue",
+        main = "Torneos", horizontal=TRUE, xlab="Cantidad de torneos", notch=TRUE)
+
+points(mean(Tournaments$Torneos, na.rm = 1), 1, pch = 19, col = "red", cex = 1.1)
+
+legend("topright", pch = c(21, 19), col = c("red"),
+       bg = "white", legend = c("Media"), cex = 1.1)
+```
+```{r}
+round(mean(Tournaments$Torneos, na.rm = 1))
+```
+
+```{r echo=FALSE}
+
+boxplot(Tournaments$Premios, col = "lightgreen",
+        main = "Premios Monetarios por Torneo (dólares)", horizontal=TRUE, xlab="Dólares", notch=TRUE)
+
+points(mean(Tournaments$Premios, na.rm = 1), 1, pch = 19, col = "red", cex = 1.1)
+
+legend("topright", pch = c(21, 19), col = c("red"),
+       bg = "white", legend = c("Media"), cex = 1.1)
+```
+```{r}
+round(mean(Tournaments$Premios, na.rm = 1),1)
+```
+
+
