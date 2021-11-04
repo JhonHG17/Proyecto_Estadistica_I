@@ -349,7 +349,7 @@ plot(Tournaments$Fecha, Tournaments$Premios, pch = 19, col = "red", xlab="Fecha 
 ```{r echo=FALSE}
 plot(Games$AñoLanzamiento, Games$Torneos, pch = 19, col = "darkred", xlab="Fecha de Lanzamiento", ylab="Cantidad de Torneos", main="Fecha de Lanzamiento ~ Torneos")
 ```
-#Correlación TOURSNAMENTS 
+#Correlación TOURNAMENTS 
 
 ```{r echo=FALSE}
 plot(Tournaments$Torneos, Tournaments$Ganadores, pch = 19, col = "skyblue", xlab="Cantidad de Torneos", ylab="Cantidad de Ganadores", main="Torneos ~ Ganadores")
@@ -439,5 +439,26 @@ legend("topright", pch = c(21, 19), col = c("red"),
 ```{r}
 round(mean(Tournaments$Premios, na.rm = 1),1)
 ```
+### Variables Aleatorias
 
+#### Funcion binomial
+
+¿Cual es la probabilidad de que para un juego de Esports cuya fecha de lanzamiento haya sido hace dos semanas se haya realiza al menos 5 torneos?
+
+Parámetros:  
+
+**x:** {$>=$5}
+**p:** probabilidad de que se hayan realizado al menos 5 torneos para un juego de Esport
+
+```{r}
+A <- Games[Games$AñoLanzamiento >= 2019, ]
+A <- A[!is.na(A$Torneos),]
+p <- sum(A$Torneos>=5)/nrow(A)
+```
+
+¿Cuál es la probabilidad de que de 10 juegos, 5 tengan al menos 5 torneos al mes?
+
+```{r}
+dbinom(5,10,p)
+```
 
