@@ -256,53 +256,115 @@ Adicionalmente, se han traducido y renombrado las variables de cada dataset al e
 ## 2.2 Descriptores numéricos
 
 ```{r}
-summary(Games)
+summary(Juegos)
+```
+#### **Equipo**
+```{r}
+boxplot(Games$AñoLanzamiento, horizontal = TRUE, col = "aquamarine", main = "Números de Torneos")
+stripchart(Games$AñoLanzamiento, method = "jitter", pch = 19, add = TRUE, col = "brown1")
+abline(v=mean(Games$AñoLanzamiento), col = "dodgerblue4")
+```
+Como primer descriptor numérico se utiliza la media de la fecha de creación de los vídeo juegos, ya que representa y relaciona directamente con el numero de torneos. como segundo descriptor numérico se recurrirá a la mediana.
+_media_
+```{r echo=FALSE}
+round(mean(Games$AñoLanzamiento),0)
+```
+_mediana_
+```{r echo=FALSE}
+round(median(Games$AñoLanzamiento),0)
 ```
 
-Media de premios totales ofrecidos por juego
+Muestra el valor central del año de creación de los juegos, como también se ve una tendencia del ciclo histórico de fechas donde se día la mayor grande creación de juegos que participan en torneas hasta el momento. Justamente el boxplot nos muestra  la mediana y media de los datos.
+
+La desviación estándar nos denota la dispersión de los datos, para ver el criterio de evaluación
+
+_desviación estándar_  
+Al ser un valor alto, significa que hay mucha dispersión en los datos. Con ferencia a 7.07 o 7 años.
+```{r echo=FALSE}
+round(sd(Games$AñoLanzamiento),2)
+```
+#### **Ingresos de Juegos**
+```{r echo=FALSE}
+barplot(table(Players$Juego), main="Cantidad de Torneos por juego", ylab="Cantidad",ylim=c(0,250), cex.names=0.9, col=c("darkgoldenrod1","plum3","seagreen2","paleturquoise","black","orange","pink","blue","green","purple"),las = 3, xlim =c (0,11) )
+```
+El gráfico de barras muestra como es la participación de diez juegos mas populares en el mundo vs número de participaciones por periodo de tiempo durante el año. Se selecciono los 10 primero juegos ya que son los mas populares actualmente.  
+Como bien se puede aprecia el juego que sobresale en cantidad de torneos es Dota2, por que los seguidores de este juego es una de las mayores a nivel mundial.
+
+#### **Números de Torneos y países mejores recaudado por premios**
 
 ```{r}
-
-Premios = mean(Games$Premios)
-
-round(Premios,2)
-
+boxplot(Tournaments$NumeroJugadoresGanadores, horizontal = TRUE, col = "aquamarine", main = "Números de Torneos",ylim=c(0,100),na.rm = 1)
 ```
-
-Media de premios totales ofrecidos en un torneo en línea por juego
+El descriptor numérico es la media, que representa los años de los jugadores durante los torneos, donde se muestra la mediana también como un descriptor numérico. Media para saber un promedio de años y la mediana para saber cual es el dato central y sin redondeo por que se trata de personas.
+_media_
+```{r echo=FALSE}
+round(mean(Tournaments$NumeroJugadoresGanadores,na.rm = 1),0)
+```
+_mediana_
+```{r echo=FALSE}
+round(median(Tournaments$NumeroJugadoresGanadores,na.rm = 1),0)
+```
 
 ```{r}
-PremiosOnline = round(mean(Games$PremiosOnline, na.rm=TRUE), 2)
-```
-
-Media de jugadores que han ganado al menos un torneo por juego
-
-```{r}
-mediaGanadores = mean(Games$Ganadores, na.rm = TRUE)
-
-round(mediaGanadores,0)
+par(mar=c(5,13,5,2))
+barplot(table(Teams_Country$Pais), main="Paises", xlab="Que pais figura más" ,cex.names=0.8 , las=1, col=c("khaki2", "lightcyan2", "olivedrab2","rosybrown2", ylim= c(0,10), xlim=c(100,0)), horiz=1)
 
 ```
+Esta es una categoría nominal, por temas de visualización de la muestra obtenida, se uso barplot para poder hacer mas visible que pais genera mas ingresos por vídeo juegos. Se aprecia que la mayoría, respondió a la pregunta, ya que "Korea" es el país que tuvo mayores ganancias.
 
-Media de jugadores que han ganado un torneo por mes
-
-```{r}
-mediaJugadores = floor(mean(Tournaments$Ganadores, na.rm = TRUE))
-mediaJugadores
+```{r echo=FALSE}
+mfv(Teams_Country$Pais)
 ```
 
-Juego con más torneos organizados en un rango mayor de tiempo.
 
-```{r}
-getmode <- function(v) {
-   uniqv <- unique(v)
-   uniqv[which.max(tabulate(match(v, uniqv)))]
-}
-modaJuego = getmode(Tournaments$Juego)
-modaJuego
+#### **Porcentaje del premio**
+
+```{r echo=FALSE}
+hist(Teams_Games$Porcentaje, prob= TRUE, main = "Que porcentaje del premio se lleva el equipo", xlim = c(0,3), ylim = c(0,0.3), xlab = "Porcentaje (%)",col = c("indianred"))
+#x <- seq(min(Teams_Games$Porcentaje), max(Teams_Games$Porcentaje), length = 100)
+#f <- dnorm(x, mean = mean(Teams_Games$Porcentaje), sd = sd(Teams_Games$Porcentaje))
+#lines(x, f, col = "dodgerblue4", lwd = 3)
+lines(density(Teams_Games$Porcentaje), lwd = 2, col = 'dodgerblue4')
+
+```
+La gráfica nos muestra la distribución del porcentaje de la ganancia que percibe en equipo. El histograma parte del 0% hasta mas del 1%, la barra roja nos muestra que todos los equipo seleccionados ganaron los torneos y ninguno perdió. Adicional a ello se le agrego una curva de densidad para poder el comportamiento de la distribución. Es casi simétrica pero con un sesgo a la izquierda.
+
+Para los descriptores numéricos se utilizo:
+- La media : 8.06
+- La mediana : 0.99
+- La desviación estándar: 18.78
+
+La media y mediana muestra su utilidad al sustentar el sesgo que tiene, mientras que la desviación estándar indica que tan concentrados están al rededor de la media, donde demuestra que estan un poco dispersos.
+
+_media_
+```{r echo=FALSE}
+round(mean(Teams_Games$Porcentaje),2)
 ```
 
-La moda es de interés porque indica el juego con mayor tiempo realizando torneos.
+_mediana_
+```{r echo=FALSE}
+round(median(Teams_Games$Porcentaje),2)
+```
+
+_desviación estándar_
+```{r echo=FALSE}
+round(sd(Teams_Games$Porcentaje),2)
+```
+
+#### **Tipos de juego**
+
+```{r, echo=FALSE}
+par(mar=c(4,9,3,3))
+barplot(table(Teams$GeneroJuego), main="Tipo de juego", cex.names=0.8 , las=1, col=c("gold1", "darkseagreen1", "darkslateblue","rosybrown2","cadetblue2","darkorange1"), xlab="Cantidad de juegos", xlim=c(0,400), horiz = 1)
+```
+Esta variable representa una categoría nominal y su aplicación es de moda, donde muestra que el tipo de juego "Player Online Battle Arena" es el más representado en el numero de juegos.
+
+
+```{r, echo=FALSE}
+mfv(Teams$GeneroJuego)
+```
+
+
 
 ### 2.3 Descriptores gráficos
 
