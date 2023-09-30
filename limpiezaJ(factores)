@@ -1,0 +1,31 @@
+---
+title: "Limpieza de la pregunta Factores"
+output: html_notebook
+---
+
+```{r, eval=FALSE}
+
+if (!require(dplyr)) {
+  install.packages("dplyr")
+}
+
+
+library(dplyr)
+
+```
+
+
+**Lectura de la data "2022.csv"**
+#el nombre del excel lo cambie por "xls"
+```{r ,eval = FALSE}
+data <- read.csv("~/Jhon Herr/xls.csv")
+DD <- data 
+```
+
+```{r}
+
+
+# Cambiar las respuestas en blanco por "N.A" en la columna "factor"
+DD$factor[DD$factor == ""] <- "N.A"
+DD
+```
